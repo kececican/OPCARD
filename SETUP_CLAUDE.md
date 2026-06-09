@@ -43,9 +43,9 @@ Kullanıcı **"projeyi başlat"** veya **"modülleri entegre et"** dediğinde a�
 ### 5. Bitti — Kullanıcıya bildir
 
 > "Entegrasyon tamamlandı. Şu değişkenleri kendi bilginle güncelle:
-> - `Code.gs` → `FB_SHEET_ID`, `PROJECT_NAME`
-> - `Index.html` → `FB_APP_NAME`
->
+> Code.gs → FB_SHEET_ID (merkezi spreadsheet ID'si), PROJECT_NAME (proje adı)
+> Index.html → FB_APP_NAME (feedback sheet'indeki sekme adı)
+
 > Güncellemeler bittikten sonra `SETUP_CLAUDE.md` dosyasını silebilirsin."
 
 ---
@@ -56,7 +56,7 @@ Kullanıcı **"projeyi başlat"** veya **"modülleri entegre et"** dediğinde a�
 
 ```javascript
 // ─── Feedback Widget ───────────────────────────────────────────────────────────
-var FB_SHEET_ID = 'BURAYA_MERKEZI_SPREADSHEET_ID';  // ← güncelle
+var FB_SHEET_ID = '1ZdakLmkO8s57T-WU1MGuyMFitzRQxO5XxhuIL7UoMwI';  // ← güncelle
 
 function submitFeedback(payload) {
   var ss      = SpreadsheetApp.openById(FB_SHEET_ID);
@@ -203,7 +203,7 @@ function submitFeedback(payload) {
 </div>
 
 <script>
-  var FB_APP_NAME = 'BURAYA_PROJE_ADINI_YAZ';  // ← güncelle
+  var FB_APP_NAME = 'OPCARD';  // ← güncelle
 
   var _fbPriority = '', _fbType = '';
 
@@ -276,7 +276,7 @@ function submitFeedback(payload) {
 ```javascript
 // ─── Giriş/Çıkış Loglama ──────────────────────────────────────────────────────
 // FB_SHEET_ID Modül 1'de tanımlı — aynı değişkeni kullanır
-var PROJECT_NAME = 'BURAYA_PROJE_ADINI_YAZ';  // ← güncelle
+var PROJECT_NAME = 'OPCARD';  // ← güncelle
 var LOG_SHEET    = PROJECT_NAME + '_GirisLoglari';
 var TIMEOUT_MIN  = 10;
 
