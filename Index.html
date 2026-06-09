@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f8f9fa; padding: 20px; font-family: sans-serif; }
+    .nav-tabs .nav-link { font-weight: bold; }
+    .excel-preview { width: 100%; border: 2px solid #ccc; background: white; font-size: 12px; }
+    .excel-preview td { border: 1px solid #ddd; padding: 5px; }
+    .header-row { background: #eee; font-weight: bold; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <ul class="nav nav-tabs mb-4" id="tabs">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#view">🔍 Mevcut Durum</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#create">➕ Yeni Tanımla</button></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="view">Yükleniyor...</div>
+      
+      <div class="tab-pane fade" id="create">
+        <form id="opForm" onsubmit="event.preventDefault(); showPreview();">
+          <div class="row g-3">
+            <div class="col-6"><label>Mamul Adı</label><input type="text" id="fMamul" class="form-control" required></div>
+            <div class="col-6"><label>Referans</label><input type="text" id="fRef" class="form-control" required></div>
+            <div class="col-2"><label>OP No</label><input type="text" id="fOpNo" class="form-control"></div>
+            <div class="col-4"><label>Operasyon</label><input type="text" id="fOpAdi" class="form-control"></div>
+            <div class="col-3"><label>Hat</label><input type="text" id="fHat" class="form-control"></div>
+            <div class="col-3"><label>Makine</label><input type="text" id="fMak" class="form-control"></div>
+            <div class="col-6"><label>Parametre</label><input type="text" id="fPar" class="form-control"></div>
+            <div class="col-6"><label>Fotoğraf</label><input type="file" id="fImg" class="form-control" onchange="readImg(this)"></div>
+          </div>
+          <hr>
+          <div id="steps">
+            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 1">
+            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 2">
+            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 3">
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Excel Ön İzleme</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="pModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white"><h5>Excel Format Ön İzleme</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <table class="excel-preview">
+            <tr class="header-row"><td>A4</td><td>B4</td><td>C</td><td>D</td><td>E</td></tr>
+            <tr><td id="pMamul"></td><td id="pRef"></td><td></td><td></td><td></td></tr>
+            <tr class="header-row"><td>A6 (OP)</td><td>B6 (AD)</td><td>C6 (HT)</td><td>D6 (MK)</td><td>E6 (PR)</td></tr>
+            <tr><td id="pOpNo"></td><td id="pOpAdi"></td><td id="pHat"></td><td id="pMak"></td><td id="pPar"></td></tr>
+            <tr><td colspan="3" id="pSteps"></td><td colspan="2" class="text-center"><img id="pImg" style="max-width:150px; display:none;"></td></tr>
+          </table>
+        </div>
+        <div class="modal-footer"><button class="btn btn-success" id="btnDl" onclick="finalSave()">💾 Onayla ve İndir</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let imgStore = { b64: "", name: "" };
+    
+    function readImg(input) {
+      if (input.files && input.files[0]) {
+        let reader = new FileReader();
+        reader.onload = e => { imgStore.b64 = e.target.result; imgStore.name = input.files[0].name; };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function showPreview() {
+      document.getElementById('pMamul').innerText = document.getElementById('fMamul').value;
+      document.getElementById('pRef').innerText = document.getElementById('fRef').value;
+      document.getElementById('pOpNo').innerText = document.getElementById('fOpNo').value;
+      document.getElementById('pOpAdi').innerText = document.getElementById('fOpAdi').value;
+      document.getElementById('pHat').innerText = document.getElementById('fHat').value;
+      document.getElementById('pMak').innerText = document.getElementById('fMak').value;
+      document.getElementById('pPar').innerText = document.getElementById('fPar').value;
+      
+      let steps = "";
+      document.querySelectorAll('.s-in').forEach(i => { if(i.value) steps += "• " + i.value + "<br>"; });
+      document.getElementById('pSteps').innerHTML = steps;
+
+      if(imgStore.b64) {
+        document.getElementById('pImg').src = imgStore.b64;
+        document.getElementById('pImg').style.display = "block";
+      }
+
+      let modal = new bootstrap.Modal(document.getElementById('pModal'));
+      modal.show();
+    }
+
+    function finalSave() {
+      let btn = document.getElementById('btnDl');
+      btn.disabled = true; btn.innerText = "Excel Hazırlanıyor...";
+      
+      let payload = {
+        mamulAdi: document.getElementById('fMamul').value,
+        referans: document.getElementById('fRef').value,
+        opNo: document.getElementById('fOpNo').value,
+        opAdi: document.getElementById('fOpAdi').value,
+        hatAdi: document.getElementById('fHat').value,
+        makineNo: document.getElementById('fMak').value,
+        parametre: document.getElementById('fPar').value,
+        imageBase64: imgStore.b64,
+        imageName: imgStore.name,
+        adimlar: Array.from(document.querySelectorAll('.s-in')).map(i => i.value)
+      };
+
+      google.script.run.withSuccessHandler(res => {
+        if(res.success) { window.open(res.downloadUrl, '_blank'); location.reload(); }
+        else alert("Hata: " + res.error);
+      }).saveAndExportExcel(payload);
+    }
+  </script>
+</body>
+</html>
