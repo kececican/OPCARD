@@ -282,7 +282,7 @@
 
 <!-- ── PREVIEW MODAL ── -->
 <div class="modal fade" id="pModal" tabindex="-1">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog modal-xl" style="max-width:1100px;">
     <div class="modal-content">
       <div class="modal-header" style="background:#1a3a6b;">
         <h5 class="modal-title text-white">📋 Operasyon Kartı Önizleme</h5>
@@ -290,39 +290,43 @@
       </div>
       <div class="modal-body op-card-wrap">
 
+        <!-- 14 sütun: logo | mamulAdi(3) | mamulRef | p-adi | p-ref | p-adet | p2-adi | p2-ref | p2-adet | kalip-adi | kalip-ref | talimat -->
         <table class="op-card-table">
-          <!-- ROW 1: Logo + Title + Talimat -->
           <colgroup>
-            <col style="width:80px"><!-- logo -->
-            <col style="width:130px"><!-- mamul adi label -->
-            <col style="width:130px"><!-- mamul adi val -->
-            <col style="width:80px"><!-- mamul ref label -->
-            <col style="width:80px"><!-- mamul ref val -->
-            <col style="width:60px"><!-- parca1 adi -->
-            <col style="width:55px"><!-- parca1 ref -->
-            <col style="width:30px"><!-- parca1 adet -->
-            <col style="width:60px"><!-- parca2 adi -->
-            <col style="width:55px"><!-- parca2 ref -->
-            <col style="width:30px"><!-- parca2 adet -->
-            <col style="width:70px"><!-- kalip adi -->
-            <col style="width:70px"><!-- kalip ref -->
-            <col style="width:110px"><!-- talimat/uygunsuzluk -->
+            <col style="width:70px">
+            <col style="width:52px"><col style="width:52px"><col style="width:62px">
+            <col style="width:62px">
+            <col style="width:62px"><col style="width:58px"><col style="width:30px">
+            <col style="width:62px"><col style="width:58px"><col style="width:30px">
+            <col style="width:78px"><col style="width:62px">
+            <col style="width:100px">
           </colgroup>
 
+          <!-- ── ROW 1: Başlık satırı ── -->
           <tr>
-            <td rowspan="4" style="text-align:center;vertical-align:middle;padding:4px;">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Valeo_Logo.svg/960px-Valeo_Logo.svg.png" class="valeo-logo" alt="Valeo">
+            <td rowspan="4" style="text-align:center;vertical-align:middle;padding:6px;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Valeo_Logo.svg/960px-Valeo_Logo.svg.png" style="height:38px;width:auto;" alt="Valeo">
             </td>
-            <td colspan="3" class="cell-header" style="font-size:9px;">MAMUL ADI</td>
-            <td colspan="1" class="cell-header" style="font-size:9px;">MAMUL REFERANSI</td>
-            <td colspan="3" class="cell-header">KULLANILAN PARÇALAR</td>
-            <td colspan="3" class="cell-header">KULLANILAN PARÇALAR</td>
-            <td colspan="2" class="cell-header">KULLANILAN KALIP/APARAT REFERANSLARI</td>
-            <td class="cell-talimat" style="font-weight:700;">Talimat No :<span id="pv-talimat"></span></td>
+            <td colspan="12" class="cell-title" style="font-size:13px;letter-spacing:.13em;padding:8px 0;">
+              MAMUL &nbsp; MONTAJ &nbsp; OPERASYON &nbsp; VE &nbsp; KONTROL &nbsp; KARTI
+            </td>
+            <td class="cell-talimat" style="font-size:10px;font-weight:700;">Talimat No :<span id="pv-talimat"></span></td>
           </tr>
+
+          <!-- ── ROW 2: Kolon başlık etiketleri ── -->
+          <tr>
+            <td colspan="3" class="cell-header" style="background:#c6efce;font-size:9px;letter-spacing:.04em;">MAMUL ADI</td>
+            <td class="cell-header" style="background:#c6efce;font-size:9px;">MAMUL REFERANSI</td>
+            <td colspan="3" class="cell-header" style="font-size:9px;">KULLANILAN PARÇALAR</td>
+            <td colspan="3" class="cell-header" style="font-size:9px;">KULLANILAN PARÇALAR</td>
+            <td colspan="2" class="cell-header" style="font-size:9px;">KULLANILAN KALIP/APARAT REFERANSLARI</td>
+            <td class="cell-talimat" style="font-size:10px;">Revizyon No:<span id="pv-revizyon">0</span></td>
+          </tr>
+
+          <!-- ── ROW 3: Mamul değerleri + parça alt-başlıkları ── -->
           <tr>
             <td colspan="3" rowspan="2" style="font-size:12px;font-weight:700;text-align:center;vertical-align:middle;" id="pv-mamul"></td>
-            <td rowspan="2" style="font-weight:700;text-align:center;vertical-align:middle;font-size:11px;" id="pv-ref"></td>
+            <td rowspan="2" style="font-size:11px;font-weight:700;text-align:center;vertical-align:middle;" id="pv-ref"></td>
             <td class="cell-header" style="font-size:9px;">ADI</td>
             <td class="cell-header" style="font-size:9px;">REFERANS</td>
             <td class="cell-header" style="font-size:9px;">ADET</td>
@@ -331,127 +335,140 @@
             <td class="cell-header" style="font-size:9px;">ADET</td>
             <td class="cell-header" style="font-size:9px;">ADI</td>
             <td class="cell-header" style="font-size:9px;">REFERANS</td>
-            <td class="cell-talimat">Revizyon No:<span id="pv-revizyon"></span></td>
-          </tr>
-          <tr>
-            <td id="pv-p1a" style="font-size:10px;"></td>
-            <td id="pv-p1r" style="font-size:10px;"></td>
-            <td id="pv-p1d" style="font-size:10px;text-align:center;"></td>
-            <td id="pv-p2a" style="font-size:10px;"></td>
-            <td id="pv-p2r" style="font-size:10px;"></td>
-            <td id="pv-p2d" style="font-size:10px;text-align:center;"></td>
-            <td id="pv-k1a" style="font-size:10px;"></td>
-            <td id="pv-k1r" style="font-size:10px;"></td>
             <td class="cell-talimat" style="font-size:9px;">Revizyon Tarihi:</td>
           </tr>
+
+          <!-- ── ROW 4: Parça 1 + Kalıp 1 ── -->
           <tr>
-            <td colspan="3" style="font-size:10px;padding:2px 5px;" id="pv-extra-parcalar"></td>
-            <td colspan="3"></td>
-            <td colspan="3" id="pv-extra-parcalar2"></td>
-            <td colspan="2" id="pv-extra-kalip" style="font-size:10px;"></td>
+            <td style="font-size:10px;" id="pv-p1a"></td>
+            <td style="font-size:10px;" id="pv-p1r"></td>
+            <td style="font-size:10px;text-align:center;" id="pv-p1d"></td>
+            <td style="font-size:10px;" id="pv-p2a"></td>
+            <td style="font-size:10px;" id="pv-p2r"></td>
+            <td style="font-size:10px;text-align:center;" id="pv-p2d"></td>
+            <td style="font-size:10px;" id="pv-k1a"></td>
+            <td style="font-size:10px;" id="pv-k1r"></td>
             <td></td>
           </tr>
 
-          <!-- ROW: TITLE -->
+          <!-- ── ROW 5: OP sütun başlıkları + Parça 2 + Uygunsuzluk (rowspan 4) ── -->
           <tr>
-            <td colspan="14" class="cell-title" style="padding:10px 0;font-size:14px;letter-spacing:.15em;">
-              MAMUL MONTAJ OPERASYON VE KONTROL KARTI
+            <td class="cell-op-label" style="font-size:9px;">OP.NO</td>
+            <td colspan="2" class="cell-op-label" style="font-size:9px;">OPERASYON ADI</td>
+            <td class="cell-op-label" style="font-size:9px;">HAT ADI</td>
+            <td class="cell-op-label" style="font-size:9px;">MAKİNE ADI</td>
+            <td colspan="2" class="cell-op-label" style="font-size:9px;">MAKİNE NO :</td>
+            <td colspan="2" class="cell-op-label" style="font-size:9px;">MAK. / KALIP AYARI</td>
+            <td style="font-size:10px;" id="pv-p3a"></td>
+            <td style="font-size:10px;" id="pv-p3r"></td>
+            <td style="font-size:10px;text-align:center;" id="pv-p3d"></td>
+            <td style="font-size:10px;" id="pv-k2a"></td>
+            <td class="uygunsuzluk-cell" rowspan="4" style="font-size:10px;line-height:1.6;">
+              UYGUNSUZLUK<br>DURUMUNDA<br>KULLANILACAK<br>REAKSİYON<br>MATRİSİ
             </td>
           </tr>
 
-          <!-- ROW: OP Headers -->
+          <!-- ── ROW 6: OP değerleri + Parça 3 ── -->
           <tr>
-            <td class="cell-op-label" style="font-size:9px;">OP.NO</td>
-            <td colspan="2" class="cell-op-label">OPERASYON ADI</td>
-            <td class="cell-op-label">HAT ADI</td>
-            <td class="cell-op-label">MAKİNE ADI</td>
-            <td colspan="2" class="cell-op-label">MAKİNE NO :</td>
-            <td colspan="3" class="cell-op-label">MAK. / KALIP AYARI</td>
-            <td colspan="4" class="cell-op-label">AÇIKLAMA</td>
-          </tr>
-          <!-- ROW: OP Values -->
-          <tr>
-            <td class="cell-no" id="pv-opno" style="font-size:12px;"></td>
-            <td colspan="2" style="font-weight:700;font-size:11px;" id="pv-opadi"></td>
+            <td class="cell-no" style="font-size:13px;font-weight:700;" id="pv-opno"></td>
+            <td colspan="2" style="font-size:11px;font-weight:700;" id="pv-opadi"></td>
             <td style="font-size:11px;" id="pv-hat"></td>
             <td style="font-size:11px;" id="pv-makadi"></td>
             <td colspan="2" style="font-size:11px;" id="pv-makno"></td>
-            <td colspan="3" style="font-size:11px;white-space:pre-line;" id="pv-ayar"></td>
-            <td colspan="4"></td>
+            <td colspan="2" style="font-size:11px;white-space:pre-line;" id="pv-ayar"></td>
+            <td style="font-size:10px;" id="pv-p4a"></td>
+            <td style="font-size:10px;" id="pv-p4r"></td>
+            <td style="font-size:10px;text-align:center;" id="pv-p4d"></td>
+            <td style="font-size:10px;" id="pv-k2r"></td>
           </tr>
 
-          <!-- ROW: Steps + Photos headers -->
+          <!-- ── ROW 7: Adım kolon başlıkları + Parça 4 ── -->
           <tr>
             <td class="cell-header" style="font-size:9px;">NO</td>
-            <td colspan="4" class="cell-header">OPERASYON TANIMLAMA</td>
-            <td colspan="2" class="cell-header">AÇIKLAMA</td>
-            <td colspan="7" class="cell-header">OPERASYON ADIMLARI</td>
+            <td colspan="3" class="cell-header" style="font-size:9px;">OPERASYON TANIMLAMA</td>
+            <td colspan="3" class="cell-header" style="font-size:9px;">AÇIKLAMA</td>
+            <td colspan="2" class="cell-header" style="font-size:9px;">OPERASYON ADIMLARI</td>
+            <td style="font-size:10px;" id="pv-p5a"></td>
+            <td style="font-size:10px;" id="pv-p5r"></td>
+            <td style="font-size:10px;text-align:center;" id="pv-p5d"></td>
+            <td></td>
           </tr>
 
-          <!-- Steps rows 1-3 with photos row 1 -->
+          <!-- ── ROW 8: Adım 1 — Fotoğraf 1-2-3 rowspan 3 başlar ── -->
           <tr>
-            <td class="cell-no" rowspan="1" id="pv-s1-no" style="font-weight:700;color:#1a3a6b;"></td>
-            <td colspan="4" class="cell-step" id="pv-s1-tanim" rowspan="1" style="vertical-align:top;padding:6px;"></td>
-            <td colspan="2" class="cell-step" id="pv-s1-acik" rowspan="1" style="vertical-align:top;font-size:10px;"></td>
-            <td colspan="2" class="photo-cell" rowspan="3" id="pv-photo-0-wrap">
+            <td class="cell-no" id="pv-s1-no"></td>
+            <td colspan="3" class="cell-step" id="pv-s1-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
+            <td colspan="3" class="cell-step" id="pv-s1-acik" style="font-size:10px;vertical-align:top;"></td>
+            <td class="photo-cell" rowspan="3">
               <div class="photo-circle">1</div>
-              <div class="preview-photo-placeholder" id="pv-nophoto-0">Fotoğraf 1</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-0">Foto 1</div>
               <img id="pv-photo-0" class="preview-photo" style="display:none;">
             </td>
-            <td colspan="2" class="photo-cell" rowspan="3" id="pv-photo-1-wrap">
+            <td class="photo-cell" rowspan="3">
               <div class="photo-circle">2</div>
-              <div class="preview-photo-placeholder" id="pv-nophoto-1">Fotoğraf 2</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-1">Foto 2</div>
               <img id="pv-photo-1" class="preview-photo" style="display:none;">
             </td>
-            <td colspan="3" class="photo-cell" rowspan="3" id="pv-photo-2-wrap">
+            <td class="photo-cell" rowspan="3" colspan="2">
               <div class="photo-circle">3</div>
-              <div class="preview-photo-placeholder" id="pv-nophoto-2">Fotoğraf 3</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-2">Foto 3</div>
               <img id="pv-photo-2" class="preview-photo" style="display:none;">
             </td>
-          </tr>
-          <tr>
-            <td class="cell-no" id="pv-s2-no" style="font-weight:700;color:#1a3a6b;"></td>
-            <td colspan="4" class="cell-step" id="pv-s2-tanim" style="vertical-align:top;padding:6px;"></td>
-            <td colspan="2" class="cell-step" id="pv-s2-acik" style="vertical-align:top;font-size:10px;"></td>
-          </tr>
-          <tr>
-            <td class="cell-no" id="pv-s3-no" style="font-weight:700;color:#1a3a6b;"></td>
-            <td colspan="4" class="cell-step" id="pv-s3-tanim" style="vertical-align:top;padding:6px;"></td>
-            <td colspan="2" class="cell-step" id="pv-s3-acik" style="vertical-align:top;font-size:10px;"></td>
-          </tr>
-          <tr>
-            <td class="cell-no" id="pv-s4-no" style="font-weight:700;color:#1a3a6b;"></td>
-            <td colspan="4" class="cell-step" id="pv-s4-tanim" style="vertical-align:top;padding:6px;"></td>
-            <td colspan="2" class="cell-step" id="pv-s4-acik" style="vertical-align:top;font-size:10px;"></td>
-            <td colspan="2" class="photo-cell" rowspan="2" id="pv-photo-3-wrap">
-              <div class="photo-circle">4</div>
-              <div class="preview-photo-placeholder" id="pv-nophoto-3">Fotoğraf 4</div>
-              <img id="pv-photo-3" class="preview-photo" style="display:none;">
-            </td>
-            <td colspan="2" class="photo-cell" rowspan="2" id="pv-photo-4-wrap">
-              <div class="photo-circle">5</div>
-              <div class="preview-photo-placeholder" id="pv-nophoto-4">Fotoğraf 5</div>
-              <img id="pv-photo-4" class="preview-photo" style="display:none;">
-            </td>
-            <td colspan="3" class="uygunsuzluk-cell" rowspan="2">
-              UYGUNSUZLUK DURUMUNDA<br>KULLANILACAK<br>REAKSİYON MATRİSİ
-            </td>
-          </tr>
-          <tr>
-            <td class="cell-no" id="pv-s5-no" style="font-weight:700;color:#1a3a6b;"></td>
-            <td colspan="4" class="cell-step" id="pv-s5-tanim" style="vertical-align:top;padding:6px;"></td>
-            <td colspan="2" class="cell-step" id="pv-s5-acik" style="vertical-align:top;font-size:10px;"></td>
+            <td></td>
           </tr>
 
-          <!-- ROW: Control Points Header -->
+          <!-- ── ROW 9: Adım 2 ── -->
           <tr>
-            <td class="cell-green" style="font-size:9px;">KONTR.<br>NO</td>
-            <td colspan="2" class="cell-green">KONTROL NOKTALARI</td>
-            <td colspan="2" class="cell-green">KONT. ALET REF.</td>
-            <td colspan="2" class="cell-green">KONT.ÖLÇÜSÜ</td>
-            <td colspan="3" class="cell-green">PERİOD</td>
-            <td class="cell-green">K.K</td>
-            <td colspan="3"></td>
+            <td class="cell-no" id="pv-s2-no"></td>
+            <td colspan="3" class="cell-step" id="pv-s2-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
+            <td colspan="3" class="cell-step" id="pv-s2-acik" style="font-size:10px;vertical-align:top;"></td>
+            <td></td>
+          </tr>
+
+          <!-- ── ROW 10: Adım 3 ── -->
+          <tr>
+            <td class="cell-no" id="pv-s3-no"></td>
+            <td colspan="3" class="cell-step" id="pv-s3-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
+            <td colspan="3" class="cell-step" id="pv-s3-acik" style="font-size:10px;vertical-align:top;"></td>
+            <td></td>
+          </tr>
+
+          <!-- ── ROW 11: Adım 4 — Fotoğraf 4-5 rowspan 2 başlar ── -->
+          <tr>
+            <td class="cell-no" id="pv-s4-no"></td>
+            <td colspan="3" class="cell-step" id="pv-s4-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
+            <td colspan="3" class="cell-step" id="pv-s4-acik" style="font-size:10px;vertical-align:top;"></td>
+            <td class="photo-cell" rowspan="2">
+              <div class="photo-circle">4</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-3">Foto 4</div>
+              <img id="pv-photo-3" class="preview-photo" style="display:none;">
+            </td>
+            <td class="photo-cell" rowspan="2">
+              <div class="photo-circle">5</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-4">Foto 5</div>
+              <img id="pv-photo-4" class="preview-photo" style="display:none;">
+            </td>
+            <td colspan="2" rowspan="2"></td>
+            <td></td>
+          </tr>
+
+          <!-- ── ROW 12: Adım 5 ── -->
+          <tr>
+            <td class="cell-no" id="pv-s5-no"></td>
+            <td colspan="3" class="cell-step" id="pv-s5-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
+            <td colspan="3" class="cell-step" id="pv-s5-acik" style="font-size:10px;vertical-align:top;"></td>
+            <td></td>
+          </tr>
+
+          <!-- ── Kontrol Noktaları Başlık ── -->
+          <tr>
+            <td class="cell-green" style="font-size:9px;text-align:center;">KONTR.<br>NO</td>
+            <td colspan="3" class="cell-green" style="font-size:9px;">KONTROL NOKTALARI</td>
+            <td colspan="2" class="cell-green" style="font-size:9px;">KONT. ALET REF.</td>
+            <td colspan="2" class="cell-green" style="font-size:9px;">KONT. ÖLÇÜSÜ</td>
+            <td colspan="3" class="cell-green" style="font-size:9px;">PERİOD</td>
+            <td colspan="2" class="cell-green" style="font-size:9px;">K.K</td>
+            <td></td>
           </tr>
           <tbody id="pv-kontrol-rows"></tbody>
         </table>
@@ -612,22 +629,21 @@
     document.getElementById('pv-makno').textContent    = d.makineNo  || '—';
     document.getElementById('pv-ayar').textContent     = d.ayar      || '—';
 
-    /* Parts — slot 1 & 2 in header, rest in extra row */
-    document.getElementById('pv-p1a').textContent = d.parcalar[0] ? d.parcalar[0].adi  : '';
-    document.getElementById('pv-p1r').textContent = d.parcalar[0] ? d.parcalar[0].ref  : '';
-    document.getElementById('pv-p1d').textContent = d.parcalar[0] ? d.parcalar[0].adet : '';
-    document.getElementById('pv-p2a').textContent = d.parcalar[1] ? d.parcalar[1].adi  : '';
-    document.getElementById('pv-p2r').textContent = d.parcalar[1] ? d.parcalar[1].ref  : '';
-    document.getElementById('pv-p2d').textContent = d.parcalar[1] ? d.parcalar[1].adet : '';
+    /* Parçalar: 1-2 → header satırı, 3-5 → OP satırlarının sağına */
+    var pvParca = ['pv-p1a','pv-p1r','pv-p1d','pv-p2a','pv-p2r','pv-p2d',
+                   'pv-p3a','pv-p3r','pv-p3d','pv-p4a','pv-p4r','pv-p4d','pv-p5a','pv-p5r','pv-p5d'];
+    var pvParcaIdx = [[0,'adi'],[0,'ref'],[0,'adet'],[1,'adi'],[1,'ref'],[1,'adet'],
+                      [2,'adi'],[2,'ref'],[2,'adet'],[3,'adi'],[3,'ref'],[3,'adet'],[4,'adi'],[4,'ref'],[4,'adet']];
+    pvParca.forEach(function(id, i) {
+      var pi = pvParcaIdx[i]; var el = document.getElementById(id);
+      if (el) el.textContent = (d.parcalar[pi[0]] ? d.parcalar[pi[0]][pi[1]] : '') || '';
+    });
 
-    var extraParca = d.parcalar.slice(2).map(function(p){ return p.adi+' / '+p.ref+' / '+p.adet; }).join('  |  ');
-    document.getElementById('pv-extra-parcalar').textContent  = d.parcalar[2] ? d.parcalar[2].adi+' '+d.parcalar[2].ref+' '+d.parcalar[2].adet : '';
-    document.getElementById('pv-extra-parcalar2').textContent = d.parcalar.slice(3).map(function(p){return p.adi+' '+p.ref;}).join(', ');
-
+    /* Kalıplar: 1 → header satırı, 2 → OP satırı */
     document.getElementById('pv-k1a').textContent = d.kaliplar[0] ? d.kaliplar[0].adi : '';
     document.getElementById('pv-k1r').textContent = d.kaliplar[0] ? d.kaliplar[0].ref : '';
-    var extraKalip = d.kaliplar.slice(1).map(function(k){return k.adi+' '+k.ref;}).join(', ');
-    document.getElementById('pv-extra-kalip').textContent = extraKalip;
+    document.getElementById('pv-k2a').textContent = d.kaliplar[1] ? d.kaliplar[1].adi : '';
+    document.getElementById('pv-k2r').textContent = d.kaliplar[1] ? d.kaliplar[1].ref : '';
 
     /* Steps */
     for (var i = 1; i <= 5; i++) {
