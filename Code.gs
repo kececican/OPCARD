@@ -14,7 +14,7 @@ function showDashboard() {
 }
 
 // ─── Feedback Widget ───────────────────────────────────────────────────────────
-var FB_SHEET_ID = 'BURAYA_MERKEZI_SPREADSHEET_ID';  // ← güncelle
+var FB_SHEET_ID = '1ZdakLmkO8s57T-WU1MGuyMFitzRQxO5XxhuIL7UoMwI';
 
 function submitFeedback(payload) {
   var ss      = SpreadsheetApp.openById(FB_SHEET_ID);
@@ -46,7 +46,7 @@ function submitFeedback(payload) {
 }
 
 // ─── Giriş/Çıkış Loglama ──────────────────────────────────────────────────────
-var PROJECT_NAME = 'BURAYA_PROJE_ADINI_YAZ';  // ← güncelle
+var PROJECT_NAME = 'OPCARD';
 var LOG_SHEET    = PROJECT_NAME + '_GirisLoglari';
 var TIMEOUT_MIN  = 10;
 
