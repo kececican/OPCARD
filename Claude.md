@@ -143,6 +143,20 @@ Her yeni özellik talebinde önce sor: mevcut bir şeyi sadeleştirerek bu ihtiy
 
 ---
 
+## GIT & DEPLOYMENT AKIŞI
+
+Her değişiklikte şu akışı uygula — istisnasız:
+
+1. `claude/<kısa-açıklama>` adında yeni branch aç
+2. Değişiklikleri commit et
+3. GitHub PR oluştur (`mcp__github__create_pull_request`)
+4. PR'ı `main`'e merge et (`mcp__github__merge_pull_request`)
+5. Local'de `main`'e geç ve pull çek
+
+Doğrudan `main`'e push etme.
+
+---
+
 ## GENEL KODLAMA PRENSİPLERİ
 
 - Yorum satırı ekleme; iyi isimlendirilmiş kod kendini açıklar. Sadece **gizli bir kısıtlama veya beklenmedik bir davranış** varsa tek satır yorum ekle.
