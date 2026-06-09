@@ -4,131 +4,49 @@
   <base target="_top">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body { background: #f8f9fa; padding: 20px; font-family: sans-serif; }
+    body { background: #f1f5f9; padding: 20px; font-family: 'Segoe UI', sans-serif; }
     .nav-tabs .nav-link { font-weight: bold; }
-    /* Sidebar collapsed: version badge gizle */
-    #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
+    #sidebar.collapsed #version-badge { width:0;opacity:0;height:0;padding:0;margin:0; }
 
-    /* Operasyon Kartı */
-    .op-card {
-      background: #fff;
-      border: 2px solid #1a3a6b;
-      border-radius: 8px;
-      overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
-      max-width: 720px;
-      margin: 0 auto;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    }
-    .op-card-header {
-      background: linear-gradient(135deg, #1a3a6b, #0052cc);
-      color: #fff;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .op-card-header .title { font-size: 18px; font-weight: 700; letter-spacing: .04em; }
-    .op-card-header .ref-badge {
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 6px;
-      padding: 4px 12px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .op-card-meta {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      border-bottom: 2px solid #e2e8f0;
-    }
-    .op-card-meta-item {
-      padding: 10px 14px;
-      border-right: 1px solid #e2e8f0;
-    }
-    .op-card-meta-item:last-child { border-right: none; }
-    .op-card-meta-item .meta-label {
-      font-size: 9px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #94a3b8;
-      margin-bottom: 4px;
-    }
-    .op-card-meta-item .meta-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #1e293b;
-    }
-    .op-card-body {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      min-height: 180px;
-    }
-    .op-card-steps {
-      padding: 16px 20px;
-      border-right: 1px solid #e2e8f0;
-    }
-    .op-card-steps .steps-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #64748b;
-      margin-bottom: 10px;
-    }
-    .op-card-steps ol {
-      margin: 0;
-      padding-left: 18px;
-    }
-    .op-card-steps ol li {
-      font-size: 13px;
-      color: #1e293b;
-      padding: 4px 0;
-      border-bottom: 1px dashed #f1f5f9;
-    }
-    .op-card-steps ol li:last-child { border-bottom: none; }
-    .op-card-photo {
-      width: 180px;
-      min-height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f8fafc;
-      padding: 12px;
-    }
-    .op-card-photo img {
-      max-width: 156px;
-      max-height: 160px;
-      object-fit: contain;
-      border-radius: 4px;
-    }
-    .op-card-photo .no-photo {
-      color: #cbd5e1;
-      font-size: 12px;
-      text-align: center;
-    }
-    .op-card-footer {
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      padding: 8px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .op-card-footer .footer-label { font-size: 10px; color: #94a3b8; }
-    .op-card-footer .status-badge {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 99px;
-      background: #fef3c7;
-      color: #92400e;
-      border: 1px solid #fcd34d;
-    }
+    /* ── Form Sections ── */
+    .form-section { background:#fff; border-radius:8px; border:1px solid #e2e8f0; margin-bottom:16px; overflow:hidden; }
+    .form-section-title { background:#1a3a6b; color:#fff; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:8px 16px; }
+    .form-section-body { padding:16px; }
+    .field-label { font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+    .parts-row { display:grid; grid-template-columns:2fr 1.5fr 80px 36px; gap:6px; align-items:center; margin-bottom:6px; }
+    .kontrol-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 60px 36px; gap:6px; align-items:center; margin-bottom:6px; }
+    .add-row-btn { background:none; border:1px dashed #94a3b8; border-radius:6px; color:#64748b; font-size:12px; cursor:pointer; padding:5px 12px; width:100%; margin-top:4px; }
+    .add-row-btn:hover { border-color:#0052cc; color:#0052cc; }
+    .remove-btn { background:none; border:none; color:#ef4444; cursor:pointer; font-size:16px; padding:0; line-height:1; }
+    .photo-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+    .photo-slot { display:flex; flex-direction:column; align-items:center; gap:4px; }
+    .photo-slot label { width:100%; }
+    .photo-num { width:24px; height:24px; background:#1a3a6b; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin:0 auto 4px; }
+    .photo-thumb { width:100%; height:80px; object-fit:cover; border-radius:6px; border:1px solid #e2e8f0; display:none; margin-top:4px; }
+
+    /* ── OP Card Preview ── */
+    .op-card-wrap { background:#f1f5f9; padding:16px; }
+    .op-card-table { width:100%; border-collapse:collapse; font-size:11px; background:#fff; table-layout:fixed; }
+    .op-card-table td, .op-card-table th { border:1px solid #999; padding:3px 5px; vertical-align:middle; }
+    .cell-title { text-align:center; font-weight:900; font-size:13px; letter-spacing:.12em; background:#fff; }
+    .cell-header { background:#d0d0d0; font-weight:700; font-size:10px; text-align:center; text-transform:uppercase; }
+    .cell-yellow { background:#ffff00; font-weight:700; font-size:10px; text-align:center; }
+    .cell-green  { background:#92d050; font-weight:700; font-size:10px; text-align:center; }
+    .cell-blue-hdr { background:#bdd7ee; font-weight:700; font-size:10px; text-align:center; }
+    .cell-op-label { background:#d9e1f2; font-weight:700; font-size:9px; text-align:center; }
+    .cell-no { text-align:center; font-weight:700; }
+    .cell-step { font-size:11px; }
+    .cell-talimat { font-size:10px; text-align:right; }
+    .photo-cell { padding:4px; text-align:center; vertical-align:middle; }
+    .photo-circle { display:inline-block; background:#f59e0b; color:#fff; width:20px; height:20px; border-radius:50%; font-weight:700; font-size:11px; line-height:20px; margin-bottom:2px; }
+    .preview-photo { width:100%; height:110px; object-fit:cover; border:1px solid #ccc; border-radius:3px; }
+    .preview-photo-placeholder { width:100%; height:110px; background:#f1f5f9; border:1px dashed #cbd5e1; border-radius:3px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:10px; }
+    .uygunsuzluk-cell { background:#ffff00; font-weight:700; font-size:11px; text-align:center; padding:8px 4px; }
+    .valeo-logo { height:36px; }
   </style>
 </head>
 <body>
+
 <!-- BETA BANNER -->
 <div id="beta-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;align-items:center;justify-content:space-between;padding:8px 24px;background:linear-gradient(90deg,#041b3c,#0052cc,#041b3c);border-bottom:1px solid rgba(118,255,3,.3);box-shadow:0 2px 8px rgba(0,0,0,.3);">
   <div style="display:flex;align-items:center;gap:12px;">
@@ -145,327 +63,704 @@
 </div>
 <script>
   function betaBannerKapat() {
-    var b = document.getElementById('beta-banner');
-    var h = document.querySelector('header');
-    var s = document.getElementById('sidebar');
-    var m = document.getElementById('main-content');
-    b.style.display = 'none';
-    if(h) h.style.top = '';
-    if(s) s.style.top = '';
-    if(m) m.style.paddingTop = '';
+    var b=document.getElementById('beta-banner'),h=document.querySelector('header'),s=document.getElementById('sidebar'),m=document.getElementById('main-content');
+    b.style.display='none';
+    if(h)h.style.top='';if(s)s.style.top='';if(m)m.style.paddingTop='';
   }
-
   function _applyVersionUI(info) {
-    var b  = document.getElementById('beta-banner');
-    var bv = document.getElementById('bb-version');
-    if(bv) bv.textContent = 'v' + info.version;
-    if(info.isBeta) {
-      b.style.display = 'flex';
-      var bh = b.offsetHeight || 40;
-      var h = document.querySelector('header');
-      var s = document.getElementById('sidebar');
-      var m = document.getElementById('main-content');
-      if(h) h.style.top = bh + 'px';
-      if(s) s.style.top = bh + 'px';
-      if(m) m.style.paddingTop = bh + 'px';
+    var b=document.getElementById('beta-banner'),bv=document.getElementById('bb-version');
+    if(bv) bv.textContent='v'+info.version;
+    if(info.isBeta){
+      b.style.display='flex';
+      var bh=b.offsetHeight||40,h=document.querySelector('header'),s=document.getElementById('sidebar'),m=document.getElementById('main-content');
+      if(h)h.style.top=bh+'px';if(s)s.style.top=bh+'px';if(m)m.style.paddingTop=bh+'px';
     }
-    var vbv = document.getElementById('vb-version');
-    var vbl = document.getElementById('vb-beta-label');
-    if(vbv) vbv.textContent = 'v' + info.version + ' · ' + info.buildDate;
-    if(vbl) { if(info.isBeta) vbl.classList.remove('hidden'); else vbl.classList.add('hidden'); }
+    var vbv=document.getElementById('vb-version'),vbl=document.getElementById('vb-beta-label');
+    if(vbv)vbv.textContent='v'+info.version+' · '+info.buildDate;
+    if(vbl){if(info.isBeta)vbl.classList.remove('hidden');else vbl.classList.add('hidden');}
   }
-
-  document.addEventListener('DOMContentLoaded', function(){
-    google.script.run
-      .withSuccessHandler(_applyVersionUI)
-      .withFailureHandler(function(){
-        _applyVersionUI({ version:'1.0', buildDate:'', isBeta:true });
-      })
-      .getAppVersion();
+  document.addEventListener('DOMContentLoaded',function(){
+    google.script.run.withSuccessHandler(_applyVersionUI).withFailureHandler(function(){_applyVersionUI({version:'1.0',buildDate:'',isBeta:true});}).getAppVersion();
   });
 </script>
 
-  <div class="container-fluid">
-    <ul class="nav nav-tabs mb-4" id="tabs">
-      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#view">🔍 Mevcut Durum</button></li>
-      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#create">➕ Yeni Tanımla</button></li>
-    </ul>
+<div class="container-fluid" style="max-width:960px;">
+  <ul class="nav nav-tabs mb-4" id="tabs">
+    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#view">🔍 Mevcut Durum</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#create">➕ Yeni Tanımla</button></li>
+  </ul>
 
-    <div class="tab-content">
-      <div class="tab-pane fade show active" id="view">Yükleniyor...</div>
-      
-      <div class="tab-pane fade" id="create">
-        <form id="opForm" onsubmit="event.preventDefault(); showPreview();">
-          <div class="row g-3">
-            <div class="col-6"><label>Mamul Adı</label><input type="text" id="fMamul" class="form-control" required></div>
-            <div class="col-6"><label>Referans</label><input type="text" id="fRef" class="form-control" required></div>
-            <div class="col-2"><label>OP No</label><input type="text" id="fOpNo" class="form-control"></div>
-            <div class="col-4"><label>Operasyon</label><input type="text" id="fOpAdi" class="form-control"></div>
-            <div class="col-3"><label>Hat</label><input type="text" id="fHat" class="form-control"></div>
-            <div class="col-3"><label>Makine</label><input type="text" id="fMak" class="form-control"></div>
-            <div class="col-6"><label>Parametre</label><input type="text" id="fPar" class="form-control"></div>
-            <div class="col-6"><label>Fotoğraf</label><input type="file" id="fImg" class="form-control" onchange="readImg(this)"></div>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="view">Yükleniyor...</div>
+
+    <div class="tab-pane fade" id="create">
+      <form id="opForm" onsubmit="event.preventDefault(); showPreview();">
+
+        <!-- 1. Temel Bilgiler -->
+        <div class="form-section">
+          <div class="form-section-title">Temel Bilgiler</div>
+          <div class="form-section-body">
+            <div class="row g-3">
+              <div class="col-5">
+                <div class="field-label">Mamul Adı *</div>
+                <input type="text" id="fMamul" class="form-control" required>
+              </div>
+              <div class="col-3">
+                <div class="field-label">Mamul Referansı *</div>
+                <input type="text" id="fRef" class="form-control" required>
+              </div>
+              <div class="col-2">
+                <div class="field-label">Talimat No</div>
+                <input type="text" id="fTalimatNo" class="form-control">
+              </div>
+              <div class="col-2">
+                <div class="field-label">Revizyon No</div>
+                <input type="text" id="fRevizyonNo" class="form-control" placeholder="0">
+              </div>
+            </div>
           </div>
-          <hr>
-          <div id="steps">
-            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 1">
-            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 2">
-            <input type="text" class="form-control mb-2 s-in" placeholder="Adım 3">
+        </div>
+
+        <!-- 2. Operasyon Bilgileri -->
+        <div class="form-section">
+          <div class="form-section-title">Operasyon Bilgileri</div>
+          <div class="form-section-body">
+            <div class="row g-3">
+              <div class="col-1">
+                <div class="field-label">OP No</div>
+                <input type="text" id="fOpNo" class="form-control">
+              </div>
+              <div class="col-3">
+                <div class="field-label">Operasyon Adı</div>
+                <input type="text" id="fOpAdi" class="form-control">
+              </div>
+              <div class="col-2">
+                <div class="field-label">Hat Adı</div>
+                <input type="text" id="fHat" class="form-control">
+              </div>
+              <div class="col-2">
+                <div class="field-label">Makine Adı</div>
+                <input type="text" id="fMakAdi" class="form-control">
+              </div>
+              <div class="col-2">
+                <div class="field-label">Makine No</div>
+                <input type="text" id="fMakNo" class="form-control">
+              </div>
+              <div class="col-2">
+                <div class="field-label">Mak./Kalıp Ayarı</div>
+                <input type="text" id="fAyar" class="form-control">
+              </div>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary mt-3">🔍 Kartı Önizle</button>
-        </form>
+        </div>
+
+        <!-- 3. Kullanılan Parçalar -->
+        <div class="form-section">
+          <div class="form-section-title">Kullanılan Parçalar</div>
+          <div class="form-section-body">
+            <div style="display:grid;grid-template-columns:2fr 1.5fr 80px 36px;gap:6px;margin-bottom:6px;">
+              <span class="field-label">ADI</span>
+              <span class="field-label">REFERANS</span>
+              <span class="field-label">ADET</span>
+              <span></span>
+            </div>
+            <div id="parcalar-container">
+              <div class="parts-row">
+                <input type="text" class="form-control form-control-sm p-adi" placeholder="Parça adı">
+                <input type="text" class="form-control form-control-sm p-ref" placeholder="Referans">
+                <input type="text" class="form-control form-control-sm p-adet" placeholder="Adet">
+                <button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>
+              </div>
+            </div>
+            <button type="button" class="add-row-btn" onclick="addParcaRow()">+ Parça Ekle</button>
+          </div>
+        </div>
+
+        <!-- 4. Kalıp / Aparat Referansları -->
+        <div class="form-section">
+          <div class="form-section-title">Kullanılan Kalıp / Aparat Referansları</div>
+          <div class="form-section-body">
+            <div id="kalip-container">
+              <div class="parts-row">
+                <input type="text" class="form-control form-control-sm k-adi" placeholder="Adı">
+                <input type="text" class="form-control form-control-sm k-ref" placeholder="Referans">
+                <span></span>
+                <button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>
+              </div>
+            </div>
+            <button type="button" class="add-row-btn" onclick="addKalipRow()">+ Kalıp / Aparat Ekle</button>
+          </div>
+        </div>
+
+        <!-- 5. Operasyon Adımları -->
+        <div class="form-section">
+          <div class="form-section-title">Operasyon Adımları (maks. 5)</div>
+          <div class="form-section-body">
+            <div style="display:grid;grid-template-columns:28px 1fr 200px;gap:8px;margin-bottom:6px;">
+              <span class="field-label">NO</span>
+              <span class="field-label">OPERASYON TANIMLAMA</span>
+              <span class="field-label">AÇIKLAMA</span>
+            </div>
+            <div id="adimlar-container">
+              <div style="display:grid;grid-template-columns:28px 1fr 200px;gap:8px;margin-bottom:6px;align-items:center;">
+                <span style="font-weight:700;color:#1a3a6b;text-align:center;">1</span>
+                <input type="text" class="form-control form-control-sm adim-tanim" placeholder="Adım tanımı">
+                <input type="text" class="form-control form-control-sm adim-acik" placeholder="Açıklama (opsiyonel)">
+              </div>
+            </div>
+            <button type="button" class="add-row-btn" onclick="addAdimRow()" id="adimEkleBtn">+ Adım Ekle</button>
+          </div>
+        </div>
+
+        <!-- 6. Fotoğraflar -->
+        <div class="form-section">
+          <div class="form-section-title">Operasyon Adım Fotoğrafları (maks. 5)</div>
+          <div class="form-section-body">
+            <div class="photo-grid" id="photo-grid">
+              <div class="photo-slot">
+                <div class="photo-num">1</div>
+                <input type="file" class="form-control form-control-sm" accept="image/*" onchange="readPhoto(this,0)">
+                <img id="pthumb-0" class="photo-thumb">
+              </div>
+              <div class="photo-slot">
+                <div class="photo-num">2</div>
+                <input type="file" class="form-control form-control-sm" accept="image/*" onchange="readPhoto(this,1)">
+                <img id="pthumb-1" class="photo-thumb">
+              </div>
+              <div class="photo-slot">
+                <div class="photo-num">3</div>
+                <input type="file" class="form-control form-control-sm" accept="image/*" onchange="readPhoto(this,2)">
+                <img id="pthumb-2" class="photo-thumb">
+              </div>
+              <div class="photo-slot">
+                <div class="photo-num">4</div>
+                <input type="file" class="form-control form-control-sm" accept="image/*" onchange="readPhoto(this,3)">
+                <img id="pthumb-3" class="photo-thumb">
+              </div>
+              <div class="photo-slot">
+                <div class="photo-num">5</div>
+                <input type="file" class="form-control form-control-sm" accept="image/*" onchange="readPhoto(this,4)">
+                <img id="pthumb-4" class="photo-thumb">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Kontrol Noktaları -->
+        <div class="form-section">
+          <div class="form-section-title">Kontrol Noktaları</div>
+          <div class="form-section-body">
+            <div class="kontrol-row" style="margin-bottom:6px;">
+              <span class="field-label">KONTROL NOKTALARI</span>
+              <span class="field-label">KONT. ALET REF.</span>
+              <span class="field-label">KONT. ÖLÇÜSÜ</span>
+              <span class="field-label">PERİOD</span>
+              <span class="field-label">K.K</span>
+              <span></span>
+            </div>
+            <div id="kontrol-container">
+              <div class="kontrol-row">
+                <input type="text" class="form-control form-control-sm kn-nokta" placeholder="Kontrol noktası">
+                <input type="text" class="form-control form-control-sm kn-alet" placeholder="Alet ref.">
+                <input type="text" class="form-control form-control-sm kn-olcu" placeholder="Ölçü">
+                <input type="text" class="form-control form-control-sm kn-period" placeholder="Period">
+                <input type="text" class="form-control form-control-sm kn-kk" placeholder="KK">
+                <button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>
+              </div>
+            </div>
+            <button type="button" class="add-row-btn" onclick="addKontrolRow()">+ Kontrol Noktası Ekle</button>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+          <button type="submit" class="btn btn-primary">🔍 Kartı Önizle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ── PREVIEW MODAL ── -->
+<div class="modal fade" id="pModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#1a3a6b;">
+        <h5 class="modal-title text-white">📋 Operasyon Kartı Önizleme</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body op-card-wrap">
+
+        <table class="op-card-table">
+          <!-- ROW 1: Logo + Title + Talimat -->
+          <colgroup>
+            <col style="width:80px"><!-- logo -->
+            <col style="width:130px"><!-- mamul adi label -->
+            <col style="width:130px"><!-- mamul adi val -->
+            <col style="width:80px"><!-- mamul ref label -->
+            <col style="width:80px"><!-- mamul ref val -->
+            <col style="width:60px"><!-- parca1 adi -->
+            <col style="width:55px"><!-- parca1 ref -->
+            <col style="width:30px"><!-- parca1 adet -->
+            <col style="width:60px"><!-- parca2 adi -->
+            <col style="width:55px"><!-- parca2 ref -->
+            <col style="width:30px"><!-- parca2 adet -->
+            <col style="width:70px"><!-- kalip adi -->
+            <col style="width:70px"><!-- kalip ref -->
+            <col style="width:110px"><!-- talimat/uygunsuzluk -->
+          </colgroup>
+
+          <tr>
+            <td rowspan="4" style="text-align:center;vertical-align:middle;padding:4px;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Valeo_Logo.svg/960px-Valeo_Logo.svg.png" class="valeo-logo" alt="Valeo">
+            </td>
+            <td colspan="3" class="cell-header" style="font-size:9px;">MAMUL ADI</td>
+            <td colspan="1" class="cell-header" style="font-size:9px;">MAMUL REFERANSI</td>
+            <td colspan="3" class="cell-header">KULLANILAN PARÇALAR</td>
+            <td colspan="3" class="cell-header">KULLANILAN PARÇALAR</td>
+            <td colspan="2" class="cell-header">KULLANILAN KALIP/APARAT REFERANSLARI</td>
+            <td class="cell-talimat" style="font-weight:700;">Talimat No :<span id="pv-talimat"></span></td>
+          </tr>
+          <tr>
+            <td colspan="3" rowspan="2" style="font-size:12px;font-weight:700;text-align:center;vertical-align:middle;" id="pv-mamul"></td>
+            <td rowspan="2" style="font-weight:700;text-align:center;vertical-align:middle;font-size:11px;" id="pv-ref"></td>
+            <td class="cell-header" style="font-size:9px;">ADI</td>
+            <td class="cell-header" style="font-size:9px;">REFERANS</td>
+            <td class="cell-header" style="font-size:9px;">ADET</td>
+            <td class="cell-header" style="font-size:9px;">ADI</td>
+            <td class="cell-header" style="font-size:9px;">REFERANS</td>
+            <td class="cell-header" style="font-size:9px;">ADET</td>
+            <td class="cell-header" style="font-size:9px;">ADI</td>
+            <td class="cell-header" style="font-size:9px;">REFERANS</td>
+            <td class="cell-talimat">Revizyon No:<span id="pv-revizyon"></span></td>
+          </tr>
+          <tr>
+            <td id="pv-p1a" style="font-size:10px;"></td>
+            <td id="pv-p1r" style="font-size:10px;"></td>
+            <td id="pv-p1d" style="font-size:10px;text-align:center;"></td>
+            <td id="pv-p2a" style="font-size:10px;"></td>
+            <td id="pv-p2r" style="font-size:10px;"></td>
+            <td id="pv-p2d" style="font-size:10px;text-align:center;"></td>
+            <td id="pv-k1a" style="font-size:10px;"></td>
+            <td id="pv-k1r" style="font-size:10px;"></td>
+            <td class="cell-talimat" style="font-size:9px;">Revizyon Tarihi:</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="font-size:10px;padding:2px 5px;" id="pv-extra-parcalar"></td>
+            <td colspan="3"></td>
+            <td colspan="3" id="pv-extra-parcalar2"></td>
+            <td colspan="2" id="pv-extra-kalip" style="font-size:10px;"></td>
+            <td></td>
+          </tr>
+
+          <!-- ROW: TITLE -->
+          <tr>
+            <td colspan="14" class="cell-title" style="padding:10px 0;font-size:14px;letter-spacing:.15em;">
+              MAMUL MONTAJ OPERASYON VE KONTROL KARTI
+            </td>
+          </tr>
+
+          <!-- ROW: OP Headers -->
+          <tr>
+            <td class="cell-op-label" style="font-size:9px;">OP.NO</td>
+            <td colspan="2" class="cell-op-label">OPERASYON ADI</td>
+            <td class="cell-op-label">HAT ADI</td>
+            <td class="cell-op-label">MAKİNE ADI</td>
+            <td colspan="2" class="cell-op-label">MAKİNE NO :</td>
+            <td colspan="3" class="cell-op-label">MAK. / KALIP AYARI</td>
+            <td colspan="4" class="cell-op-label">AÇIKLAMA</td>
+          </tr>
+          <!-- ROW: OP Values -->
+          <tr>
+            <td class="cell-no" id="pv-opno" style="font-size:12px;"></td>
+            <td colspan="2" style="font-weight:700;font-size:11px;" id="pv-opadi"></td>
+            <td style="font-size:11px;" id="pv-hat"></td>
+            <td style="font-size:11px;" id="pv-makadi"></td>
+            <td colspan="2" style="font-size:11px;" id="pv-makno"></td>
+            <td colspan="3" style="font-size:11px;white-space:pre-line;" id="pv-ayar"></td>
+            <td colspan="4"></td>
+          </tr>
+
+          <!-- ROW: Steps + Photos headers -->
+          <tr>
+            <td class="cell-header" style="font-size:9px;">NO</td>
+            <td colspan="4" class="cell-header">OPERASYON TANIMLAMA</td>
+            <td colspan="2" class="cell-header">AÇIKLAMA</td>
+            <td colspan="7" class="cell-header">OPERASYON ADIMLARI</td>
+          </tr>
+
+          <!-- Steps rows 1-3 with photos row 1 -->
+          <tr>
+            <td class="cell-no" rowspan="1" id="pv-s1-no" style="font-weight:700;color:#1a3a6b;"></td>
+            <td colspan="4" class="cell-step" id="pv-s1-tanim" rowspan="1" style="vertical-align:top;padding:6px;"></td>
+            <td colspan="2" class="cell-step" id="pv-s1-acik" rowspan="1" style="vertical-align:top;font-size:10px;"></td>
+            <td colspan="2" class="photo-cell" rowspan="3" id="pv-photo-0-wrap">
+              <div class="photo-circle">1</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-0">Fotoğraf 1</div>
+              <img id="pv-photo-0" class="preview-photo" style="display:none;">
+            </td>
+            <td colspan="2" class="photo-cell" rowspan="3" id="pv-photo-1-wrap">
+              <div class="photo-circle">2</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-1">Fotoğraf 2</div>
+              <img id="pv-photo-1" class="preview-photo" style="display:none;">
+            </td>
+            <td colspan="3" class="photo-cell" rowspan="3" id="pv-photo-2-wrap">
+              <div class="photo-circle">3</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-2">Fotoğraf 3</div>
+              <img id="pv-photo-2" class="preview-photo" style="display:none;">
+            </td>
+          </tr>
+          <tr>
+            <td class="cell-no" id="pv-s2-no" style="font-weight:700;color:#1a3a6b;"></td>
+            <td colspan="4" class="cell-step" id="pv-s2-tanim" style="vertical-align:top;padding:6px;"></td>
+            <td colspan="2" class="cell-step" id="pv-s2-acik" style="vertical-align:top;font-size:10px;"></td>
+          </tr>
+          <tr>
+            <td class="cell-no" id="pv-s3-no" style="font-weight:700;color:#1a3a6b;"></td>
+            <td colspan="4" class="cell-step" id="pv-s3-tanim" style="vertical-align:top;padding:6px;"></td>
+            <td colspan="2" class="cell-step" id="pv-s3-acik" style="vertical-align:top;font-size:10px;"></td>
+          </tr>
+          <tr>
+            <td class="cell-no" id="pv-s4-no" style="font-weight:700;color:#1a3a6b;"></td>
+            <td colspan="4" class="cell-step" id="pv-s4-tanim" style="vertical-align:top;padding:6px;"></td>
+            <td colspan="2" class="cell-step" id="pv-s4-acik" style="vertical-align:top;font-size:10px;"></td>
+            <td colspan="2" class="photo-cell" rowspan="2" id="pv-photo-3-wrap">
+              <div class="photo-circle">4</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-3">Fotoğraf 4</div>
+              <img id="pv-photo-3" class="preview-photo" style="display:none;">
+            </td>
+            <td colspan="2" class="photo-cell" rowspan="2" id="pv-photo-4-wrap">
+              <div class="photo-circle">5</div>
+              <div class="preview-photo-placeholder" id="pv-nophoto-4">Fotoğraf 5</div>
+              <img id="pv-photo-4" class="preview-photo" style="display:none;">
+            </td>
+            <td colspan="3" class="uygunsuzluk-cell" rowspan="2">
+              UYGUNSUZLUK DURUMUNDA<br>KULLANILACAK<br>REAKSİYON MATRİSİ
+            </td>
+          </tr>
+          <tr>
+            <td class="cell-no" id="pv-s5-no" style="font-weight:700;color:#1a3a6b;"></td>
+            <td colspan="4" class="cell-step" id="pv-s5-tanim" style="vertical-align:top;padding:6px;"></td>
+            <td colspan="2" class="cell-step" id="pv-s5-acik" style="vertical-align:top;font-size:10px;"></td>
+          </tr>
+
+          <!-- ROW: Control Points Header -->
+          <tr>
+            <td class="cell-green" style="font-size:9px;">KONTR.<br>NO</td>
+            <td colspan="2" class="cell-green">KONTROL NOKTALARI</td>
+            <td colspan="2" class="cell-green">KONT. ALET REF.</td>
+            <td colspan="2" class="cell-green">KONT.ÖLÇÜSÜ</td>
+            <td colspan="3" class="cell-green">PERİOD</td>
+            <td class="cell-green">K.K</td>
+            <td colspan="3"></td>
+          </tr>
+          <tbody id="pv-kontrol-rows"></tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Düzenle</button>
+        <button class="btn btn-success" id="btnDl" onclick="finalSave()">💾 Onayla ve Excel İndir</button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="modal fade" id="pModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header" style="background:#1a3a6b;">
-          <h5 class="modal-title text-white">📋 Operasyon Kartı Önizleme</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body" style="background:#f1f5f9;padding:24px;">
-          <div class="op-card">
-            <div class="op-card-header">
-              <span class="title" id="pMamul"></span>
-              <span class="ref-badge" id="pRef"></span>
-            </div>
-            <div class="op-card-meta">
-              <div class="op-card-meta-item">
-                <div class="meta-label">OP No</div>
-                <div class="meta-value" id="pOpNo"></div>
-              </div>
-              <div class="op-card-meta-item">
-                <div class="meta-label">Operasyon</div>
-                <div class="meta-value" id="pOpAdi"></div>
-              </div>
-              <div class="op-card-meta-item">
-                <div class="meta-label">Hat</div>
-                <div class="meta-value" id="pHat"></div>
-              </div>
-              <div class="op-card-meta-item">
-                <div class="meta-label">Makine</div>
-                <div class="meta-value" id="pMak"></div>
-              </div>
-              <div class="op-card-meta-item">
-                <div class="meta-label">Parametre</div>
-                <div class="meta-value" id="pPar"></div>
-              </div>
-            </div>
-            <div class="op-card-body">
-              <div class="op-card-steps">
-                <div class="steps-label">Operasyon Adımları</div>
-                <ol id="pSteps"></ol>
-              </div>
-              <div class="op-card-photo">
-                <img id="pImg" style="display:none;">
-                <div class="no-photo" id="pNoPhoto">📷<br>Fotoğraf yok</div>
-              </div>
-            </div>
-            <div class="op-card-footer">
-              <span class="footer-label">OPCARD · Operasyon Tanım Kartı</span>
-              <span class="status-badge">Taslak</span>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-dismiss="modal">Düzenle</button>
-          <button class="btn btn-success" id="btnDl" onclick="finalSave()">💾 Onayla ve Excel İndir</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  var SESSION_ID = "<?= sessionId ?>";
+  var TIMEOUT_MS = <?= timeoutMin ?> * 60 * 1000;
+  var sessionStart = Date.now(), hiddenAt = null, exitLogged = false;
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    var SESSION_ID = "<?= sessionId ?>";
-    var TIMEOUT_MS = <?= timeoutMin ?> * 60 * 1000;
-
-    var sessionStart = Date.now();
-    var hiddenAt     = null;
-    var exitLogged   = false;
-
-    function _logExit(exitTimestamp, durationMs) {
-      if (exitLogged) return;
-      exitLogged = true;
-      google.script.run.logExit(SESSION_ID, exitTimestamp, Math.round(durationMs / 1000));
+  function _logExit(exitTimestamp, durationMs) {
+    if (exitLogged) return; exitLogged = true;
+    google.script.run.logExit(SESSION_ID, exitTimestamp, Math.round(durationMs / 1000));
+  }
+  function _newSession() {
+    exitLogged = false;
+    google.script.run.withSuccessHandler(function(r){ SESSION_ID=r.sessionId; sessionStart=Date.now(); hiddenAt=null; }).createSession();
+  }
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') { hiddenAt = Date.now(); }
+    else {
+      if (hiddenAt === null) return;
+      if (Date.now() - hiddenAt >= TIMEOUT_MS) { _logExit(hiddenAt, hiddenAt - sessionStart); _newSession(); }
+      else { hiddenAt = null; }
     }
+  });
+  window.addEventListener('beforeunload', function() {
+    if (exitLogged) return;
+    var exitAt = hiddenAt !== null ? hiddenAt : Date.now();
+    _logExit(exitAt, exitAt - sessionStart);
+  });
+</script>
 
-    function _newSession() {
-      exitLogged = false;
-      google.script.run
-        .withSuccessHandler(function(result) {
-          SESSION_ID   = result.sessionId;
-          sessionStart = Date.now();
-          hiddenAt     = null;
-        })
-        .createSession();
-    }
+<script>
+  /* ── Photo stores ── */
+  var photoStore = [{b64:'',name:''},{b64:'',name:''},{b64:'',name:''},{b64:'',name:''},{b64:'',name:''}];
 
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'hidden') {
-        hiddenAt = Date.now();
-      } else {
-        if (hiddenAt === null) return;
-        var elapsed = Date.now() - hiddenAt;
-        if (elapsed >= TIMEOUT_MS) {
-          _logExit(hiddenAt, hiddenAt - sessionStart);
-          _newSession();
-        } else {
-          hiddenAt = null;
-        }
-      }
-    });
-
-    window.addEventListener('beforeunload', function() {
-      if (exitLogged) return;
-      var exitAt = hiddenAt !== null ? hiddenAt : Date.now();
-      _logExit(exitAt, exitAt - sessionStart);
-    });
-  </script>
-  <script>
-    let imgStore = { b64: "", name: "" };
-    
-    function readImg(input) {
-      if (input.files && input.files[0]) {
-        let reader = new FileReader();
-        reader.onload = e => { imgStore.b64 = e.target.result; imgStore.name = input.files[0].name; };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    function showPreview() {
-      document.getElementById('pMamul').innerText = document.getElementById('fMamul').value || '—';
-      document.getElementById('pRef').innerText   = document.getElementById('fRef').value   || '—';
-      document.getElementById('pOpNo').innerText  = document.getElementById('fOpNo').value  || '—';
-      document.getElementById('pOpAdi').innerText = document.getElementById('fOpAdi').value || '—';
-      document.getElementById('pHat').innerText   = document.getElementById('fHat').value   || '—';
-      document.getElementById('pMak').innerText   = document.getElementById('fMak').value   || '—';
-      document.getElementById('pPar').innerText   = document.getElementById('fPar').value   || '—';
-
-      let stepsHtml = '';
-      document.querySelectorAll('.s-in').forEach(i => {
-        if(i.value.trim()) stepsHtml += '<li>' + i.value.trim() + '</li>';
-      });
-      document.getElementById('pSteps').innerHTML = stepsHtml || '<li style="color:#94a3b8;list-style:none;">Adım girilmedi</li>';
-
-      if(imgStore.b64) {
-        document.getElementById('pImg').src = imgStore.b64;
-        document.getElementById('pImg').style.display = 'block';
-        document.getElementById('pNoPhoto').style.display = 'none';
-      } else {
-        document.getElementById('pImg').style.display = 'none';
-        document.getElementById('pNoPhoto').style.display = 'block';
-      }
-
-      let modal = new bootstrap.Modal(document.getElementById('pModal'));
-      modal.show();
-    }
-
-    function finalSave() {
-      let btn = document.getElementById('btnDl');
-      btn.disabled = true; btn.innerText = "Excel Hazırlanıyor...";
-      
-      let payload = {
-        mamulAdi: document.getElementById('fMamul').value,
-        referans: document.getElementById('fRef').value,
-        opNo: document.getElementById('fOpNo').value,
-        opAdi: document.getElementById('fOpAdi').value,
-        hatAdi: document.getElementById('fHat').value,
-        makineNo: document.getElementById('fMak').value,
-        parametre: document.getElementById('fPar').value,
-        imageBase64: imgStore.b64,
-        imageName: imgStore.name,
-        adimlar: Array.from(document.querySelectorAll('.s-in')).map(i => i.value)
+  function readPhoto(input, idx) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        photoStore[idx].b64  = e.target.result;
+        photoStore[idx].name = input.files[0].name;
+        var thumb = document.getElementById('pthumb-' + idx);
+        thumb.src = e.target.result;
+        thumb.style.display = 'block';
       };
-
-      google.script.run.withSuccessHandler(res => {
-        if(res.success) { window.open(res.downloadUrl, '_blank'); location.reload(); }
-        else alert("Hata: " + res.error);
-      }).saveAndExportExcel(payload);
+      reader.readAsDataURL(input.files[0]);
     }
-  </script>
+  }
 
+  /* ── Dynamic rows ── */
+  function removeRow(btn) { btn.closest('.parts-row, .kontrol-row, [data-row]') && btn.closest('[data-row], .parts-row, .kontrol-row').remove(); }
+
+  function addParcaRow() {
+    var d = document.createElement('div'); d.className = 'parts-row';
+    d.innerHTML = '<input type="text" class="form-control form-control-sm p-adi" placeholder="Parça adı"><input type="text" class="form-control form-control-sm p-ref" placeholder="Referans"><input type="text" class="form-control form-control-sm p-adet" placeholder="Adet"><button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>';
+    document.getElementById('parcalar-container').appendChild(d);
+  }
+
+  function addKalipRow() {
+    var d = document.createElement('div'); d.className = 'parts-row';
+    d.innerHTML = '<input type="text" class="form-control form-control-sm k-adi" placeholder="Adı"><input type="text" class="form-control form-control-sm k-ref" placeholder="Referans"><span></span><button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>';
+    document.getElementById('kalip-container').appendChild(d);
+  }
+
+  var adimCount = 1;
+  function addAdimRow() {
+    if (adimCount >= 5) return;
+    adimCount++;
+    var d = document.createElement('div');
+    d.style.cssText = 'display:grid;grid-template-columns:28px 1fr 200px;gap:8px;margin-bottom:6px;align-items:center;';
+    d.innerHTML = '<span style="font-weight:700;color:#1a3a6b;text-align:center;">'+adimCount+'</span><input type="text" class="form-control form-control-sm adim-tanim" placeholder="Adım tanımı"><input type="text" class="form-control form-control-sm adim-acik" placeholder="Açıklama">';
+    document.getElementById('adimlar-container').appendChild(d);
+    if (adimCount >= 5) document.getElementById('adimEkleBtn').style.display = 'none';
+  }
+
+  function addKontrolRow() {
+    var d = document.createElement('div'); d.className = 'kontrol-row';
+    d.innerHTML = '<input type="text" class="form-control form-control-sm kn-nokta" placeholder="Kontrol noktası"><input type="text" class="form-control form-control-sm kn-alet" placeholder="Alet ref."><input type="text" class="form-control form-control-sm kn-olcu" placeholder="Ölçü"><input type="text" class="form-control form-control-sm kn-period" placeholder="Period"><input type="text" class="form-control form-control-sm kn-kk" placeholder="KK"><button type="button" class="remove-btn" onclick="removeRow(this)">✕</button>';
+    document.getElementById('kontrol-container').appendChild(d);
+  }
+
+  /* ── Collect form data ── */
+  function collectFormData() {
+    var parcalar = [];
+    document.querySelectorAll('#parcalar-container .parts-row').forEach(function(row) {
+      var adi  = row.querySelector('.p-adi').value.trim();
+      var ref  = row.querySelector('.p-ref').value.trim();
+      var adet = row.querySelector('.p-adet').value.trim();
+      if (adi || ref || adet) parcalar.push({adi:adi, ref:ref, adet:adet});
+    });
+
+    var kaliplar = [];
+    document.querySelectorAll('#kalip-container .parts-row').forEach(function(row) {
+      var adi = row.querySelector('.k-adi').value.trim();
+      var ref = row.querySelector('.k-ref').value.trim();
+      if (adi || ref) kaliplar.push({adi:adi, ref:ref});
+    });
+
+    var adimlar = [];
+    document.querySelectorAll('#adimlar-container .adim-tanim').forEach(function(inp, i) {
+      var tanim = inp.value.trim();
+      var acik  = document.querySelectorAll('#adimlar-container .adim-acik')[i].value.trim();
+      if (tanim) adimlar.push({tanim:tanim, acik:acik});
+    });
+
+    var kontrollar = [];
+    document.querySelectorAll('#kontrol-container .kontrol-row').forEach(function(row) {
+      var nokta  = row.querySelector('.kn-nokta').value.trim();
+      var alet   = row.querySelector('.kn-alet').value.trim();
+      var olcu   = row.querySelector('.kn-olcu').value.trim();
+      var period = row.querySelector('.kn-period').value.trim();
+      var kk     = row.querySelector('.kn-kk').value.trim();
+      if (nokta) kontrollar.push({nokta:nokta, alet:alet, olcu:olcu, period:period, kk:kk});
+    });
+
+    return {
+      mamulAdi:   document.getElementById('fMamul').value,
+      referans:   document.getElementById('fRef').value,
+      talimatNo:  document.getElementById('fTalimatNo').value,
+      revizyonNo: document.getElementById('fRevizyonNo').value,
+      opNo:       document.getElementById('fOpNo').value,
+      opAdi:      document.getElementById('fOpAdi').value,
+      hatAdi:     document.getElementById('fHat').value,
+      makineAdi:  document.getElementById('fMakAdi').value,
+      makineNo:   document.getElementById('fMakNo').value,
+      ayar:       document.getElementById('fAyar').value,
+      parcalar:   parcalar,
+      kaliplar:   kaliplar,
+      adimlar:    adimlar,
+      kontrollar: kontrollar,
+      photos:     photoStore.map(function(p){ return {b64:p.b64, name:p.name}; })
+    };
+  }
+
+  /* ── Preview ── */
+  function showPreview() {
+    var d = collectFormData();
+
+    document.getElementById('pv-mamul').textContent    = d.mamulAdi || '—';
+    document.getElementById('pv-ref').textContent      = d.referans  || '—';
+    document.getElementById('pv-talimat').textContent  = d.talimatNo  ? ' ' + d.talimatNo  : '';
+    document.getElementById('pv-revizyon').textContent = d.revizyonNo ? d.revizyonNo : '0';
+    document.getElementById('pv-opno').textContent     = d.opNo   || '—';
+    document.getElementById('pv-opadi').textContent    = d.opAdi  || '—';
+    document.getElementById('pv-hat').textContent      = d.hatAdi || '—';
+    document.getElementById('pv-makadi').textContent   = d.makineAdi || '—';
+    document.getElementById('pv-makno').textContent    = d.makineNo  || '—';
+    document.getElementById('pv-ayar').textContent     = d.ayar      || '—';
+
+    /* Parts — slot 1 & 2 in header, rest in extra row */
+    document.getElementById('pv-p1a').textContent = d.parcalar[0] ? d.parcalar[0].adi  : '';
+    document.getElementById('pv-p1r').textContent = d.parcalar[0] ? d.parcalar[0].ref  : '';
+    document.getElementById('pv-p1d').textContent = d.parcalar[0] ? d.parcalar[0].adet : '';
+    document.getElementById('pv-p2a').textContent = d.parcalar[1] ? d.parcalar[1].adi  : '';
+    document.getElementById('pv-p2r').textContent = d.parcalar[1] ? d.parcalar[1].ref  : '';
+    document.getElementById('pv-p2d').textContent = d.parcalar[1] ? d.parcalar[1].adet : '';
+
+    var extraParca = d.parcalar.slice(2).map(function(p){ return p.adi+' / '+p.ref+' / '+p.adet; }).join('  |  ');
+    document.getElementById('pv-extra-parcalar').textContent  = d.parcalar[2] ? d.parcalar[2].adi+' '+d.parcalar[2].ref+' '+d.parcalar[2].adet : '';
+    document.getElementById('pv-extra-parcalar2').textContent = d.parcalar.slice(3).map(function(p){return p.adi+' '+p.ref;}).join(', ');
+
+    document.getElementById('pv-k1a').textContent = d.kaliplar[0] ? d.kaliplar[0].adi : '';
+    document.getElementById('pv-k1r').textContent = d.kaliplar[0] ? d.kaliplar[0].ref : '';
+    var extraKalip = d.kaliplar.slice(1).map(function(k){return k.adi+' '+k.ref;}).join(', ');
+    document.getElementById('pv-extra-kalip').textContent = extraKalip;
+
+    /* Steps */
+    for (var i = 1; i <= 5; i++) {
+      var step = d.adimlar[i-1];
+      document.getElementById('pv-s'+i+'-no').textContent    = step ? i : '';
+      document.getElementById('pv-s'+i+'-tanim').textContent = step ? step.tanim : '';
+      document.getElementById('pv-s'+i+'-acik').textContent  = step ? step.acik  : '';
+    }
+
+    /* Photos */
+    for (var j = 0; j < 5; j++) {
+      var img    = document.getElementById('pv-photo-'+j);
+      var noph   = document.getElementById('pv-nophoto-'+j);
+      if (d.photos[j] && d.photos[j].b64) {
+        img.src = d.photos[j].b64;
+        img.style.display   = 'block';
+        noph.style.display  = 'none';
+      } else {
+        img.style.display   = 'none';
+        noph.style.display  = 'flex';
+      }
+    }
+
+    /* Control rows */
+    var tbody = document.getElementById('pv-kontrol-rows');
+    tbody.innerHTML = '';
+    d.kontrollar.forEach(function(k, idx) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td class="cell-no" style="font-size:10px;">'+(idx+1)+'</td>'
+        +'<td colspan="2" style="font-size:10px;">'+k.nokta+'</td>'
+        +'<td colspan="2" style="font-size:10px;">'+k.alet+'</td>'
+        +'<td colspan="2" style="font-size:10px;">'+k.olcu+'</td>'
+        +'<td colspan="3" style="font-size:10px;">'+k.period+'</td>'
+        +'<td style="font-size:10px;text-align:center;">'+k.kk+'</td>'
+        +'<td colspan="3"></td>';
+      tbody.appendChild(tr);
+    });
+
+    new bootstrap.Modal(document.getElementById('pModal')).show();
+  }
+
+  /* ── Excel Export ── */
+  function finalSave() {
+    var btn = document.getElementById('btnDl');
+    btn.disabled = true; btn.textContent = 'Excel Hazırlanıyor...';
+
+    var d = collectFormData();
+    var payload = {
+      mamulAdi:   d.mamulAdi,
+      referans:   d.referans,
+      talimatNo:  d.talimatNo,
+      revizyonNo: d.revizyonNo,
+      opNo:       d.opNo,
+      opAdi:      d.opAdi,
+      hatAdi:     d.hatAdi,
+      makineAdi:  d.makineAdi,
+      makineNo:   d.makineNo,
+      ayar:       d.ayar,
+      parcalar:   d.parcalar,
+      kaliplar:   d.kaliplar,
+      adimlar:    d.adimlar.map(function(a){ return a.tanim; }),
+      adimAciklar: d.adimlar.map(function(a){ return a.acik; }),
+      kontrollar: d.kontrollar,
+      imageBase64: d.photos[0].b64,
+      imageName:   d.photos[0].name,
+      photos:      d.photos
+    };
+
+    google.script.run.withSuccessHandler(function(res) {
+      btn.disabled = false; btn.textContent = '💾 Onayla ve Excel İndir';
+      if (res.success) { window.open(res.downloadUrl, '_blank'); }
+      else alert('Hata: ' + res.error);
+    }).withFailureHandler(function(err) {
+      btn.disabled = false; btn.textContent = '💾 Onayla ve Excel İndir';
+      alert('Hata: ' + (err.message || err));
+    }).saveAndExportExcel(payload);
+  }
+</script>
+
+<!-- ── Feedback Widget ── -->
 <style>
-  #fb-btn{position:fixed;bottom:24px;left:20px;display:flex;align-items:center;gap:8px;
-    padding:10px 18px;background:#1E293B;color:#fff;border:none;border-radius:99px;
-    font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);
-    z-index:8000;transition:all .18s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  #fb-btn{position:fixed;bottom:24px;left:20px;display:flex;align-items:center;gap:8px;padding:10px 18px;background:#1E293B;color:#fff;border:none;border-radius:99px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:8000;transition:all .18s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
   #fb-btn:hover{background:#0F172A;transform:translateY(-2px);}
-  #fb-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);
-    z-index:8001;align-items:flex-end;justify-content:flex-start;padding:0 0 80px 20px;}
+  #fb-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:8001;align-items:flex-end;justify-content:flex-start;padding:0 0 80px 20px;}
   #fb-overlay.fb-open{display:flex;}
-  #fb-box{background:#fff;border-radius:16px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.2);
-    overflow:hidden;animation:fbSlide .2s ease;
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  #fb-box{background:#fff;border-radius:16px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.2);overflow:hidden;animation:fbSlide .2s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
   @keyframes fbSlide{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
-  #fb-head{display:flex;align-items:center;justify-content:space-between;
-    padding:14px 16px;border-bottom:1px solid #E2E8F0;}
+  #fb-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #E2E8F0;}
   #fb-head span{font-size:14px;font-weight:700;color:#1E293B;}
-  #fb-head button{background:none;border:none;font-size:17px;cursor:pointer;color:#94A3B8;
-    padding:2px 5px;border-radius:4px;line-height:1;}
+  #fb-head button{background:none;border:none;font-size:17px;cursor:pointer;color:#94A3B8;padding:2px 5px;border-radius:4px;line-height:1;}
   #fb-head button:hover{background:#F1F5F9;color:#1E293B;}
   #fb-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
-  .fb-label{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;
-    letter-spacing:.06em;display:block;margin-bottom:5px;}
+  .fb-label{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:5px;}
   .fb-required{color:#EF4444;}
   #fb-type-wrap,#fb-pri-wrap{display:flex;gap:6px;}
-  .fb-type,.fb-pri{flex:1;padding:8px 4px;border:2px solid #E2E8F0;border-radius:8px;
-    background:#fff;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;
-    transition:all .14s;text-align:center;font-family:inherit;}
+  .fb-type,.fb-pri{flex:1;padding:8px 4px;border:2px solid #E2E8F0;border-radius:8px;background:#fff;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;transition:all .14s;text-align:center;font-family:inherit;}
   .fb-type:hover,.fb-pri:hover{border-color:#94A3B8;}
-  .fb-type[data-v="Bug"].fb-sel        {border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
+  .fb-type[data-v="Bug"].fb-sel{border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
   .fb-type[data-v="Improvement"].fb-sel{border-color:#22C55E;background:#DCFCE7;color:#15803D;}
-  .fb-pri[data-v="Low"].fb-sel   {border-color:#3B82F6;background:#EFF6FF;color:#1D4ED8;}
+  .fb-pri[data-v="Low"].fb-sel{border-color:#3B82F6;background:#EFF6FF;color:#1D4ED8;}
   .fb-pri[data-v="Medium"].fb-sel{border-color:#F59E0B;background:#FEF3C7;color:#92400E;}
   .fb-pri[data-v="Urgent"].fb-sel{border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
   #fb-type-err,#fb-pri-err,#fb-msg-err{color:#EF4444;font-size:11px;display:none;margin-top:4px;}
-  #fb-message{width:100%;padding:9px 11px;border:1px solid #E2E8F0;border-radius:8px;
-    font-size:13px;font-family:inherit;resize:vertical;min-height:90px;
-    outline:none;color:#1E293B;transition:border-color .14s;}
+  #fb-message{width:100%;padding:9px 11px;border:1px solid #E2E8F0;border-radius:8px;font-size:13px;font-family:inherit;resize:vertical;min-height:90px;outline:none;color:#1E293B;transition:border-color .14s;}
   #fb-message:focus{border-color:#4A6CF7;}
   #fb-message.fb-err{border-color:#EF4444;}
-  #fb-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;
-    border-top:1px solid #E2E8F0;}
-  .fb-cancel{padding:8px 14px;border:1px solid #E2E8F0;border-radius:6px;background:#fff;
-    font-size:13px;font-weight:600;color:#64748B;cursor:pointer;font-family:inherit;}
+  #fb-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid #E2E8F0;}
+  .fb-cancel{padding:8px 14px;border:1px solid #E2E8F0;border-radius:6px;background:#fff;font-size:13px;font-weight:600;color:#64748B;cursor:pointer;font-family:inherit;}
   .fb-cancel:hover{background:#F1F5F9;}
-  .fb-submit{padding:8px 16px;border:none;border-radius:6px;background:#4A6CF7;
-    color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .14s;}
+  .fb-submit{padding:8px 16px;border:none;border-radius:6px;background:#4A6CF7;color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .14s;}
   .fb-submit:hover{background:#3A5AE0;}
   .fb-submit:disabled{background:#94A3B8;cursor:not-allowed;}
   #fb-success{display:none;padding:28px 16px;text-align:center;}
   #fb-success .fb-ok-icon{font-size:38px;margin-bottom:8px;}
   #fb-success strong{font-size:15px;color:#1E293B;display:block;}
   #fb-success p{color:#64748B;font-size:13px;margin-top:5px;}
-  @media(max-width:600px){
-    #fb-btn{bottom:16px;left:12px;padding:9px 14px;font-size:12px;}
-    #fb-overlay{padding:0 0 68px 12px;}
-    #fb-box{width:calc(100vw - 24px);}
-  }
+  @media(max-width:600px){#fb-btn{bottom:16px;left:12px;padding:9px 14px;font-size:12px;}#fb-overlay{padding:0 0 68px 12px;}#fb-box{width:calc(100vw - 24px);}}
 </style>
 
 <button id="fb-btn" onclick="fbToggle()">
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-       stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-  </svg>
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   Geri Bildirim
 </button>
 
 <div id="fb-overlay" onclick="fbOverlayClick(event)">
   <div id="fb-box">
-    <div id="fb-head">
-      <span>Geri Bildirim</span>
-      <button onclick="fbClose()">&#x2715;</button>
-    </div>
+    <div id="fb-head"><span>Geri Bildirim</span><button onclick="fbClose()">&#x2715;</button></div>
     <div id="fb-form-wrap">
       <div id="fb-body">
         <div>
           <span class="fb-label">Tür <span class="fb-required">*</span></span>
           <div id="fb-type-wrap">
-            <button type="button" class="fb-type" data-v="Bug"         onclick="fbType(this)">Bug</button>
+            <button type="button" class="fb-type" data-v="Bug" onclick="fbType(this)">Bug</button>
             <button type="button" class="fb-type" data-v="Improvement" onclick="fbType(this)">İyileştirme</button>
           </div>
           <div id="fb-type-err">Lütfen bir tür seçin.</div>
@@ -473,7 +768,7 @@
         <div>
           <span class="fb-label">Öncelik <span class="fb-required">*</span></span>
           <div id="fb-pri-wrap">
-            <button type="button" class="fb-pri" data-v="Low"    onclick="fbPri(this)">Düşük</button>
+            <button type="button" class="fb-pri" data-v="Low" onclick="fbPri(this)">Düşük</button>
             <button type="button" class="fb-pri" data-v="Medium" onclick="fbPri(this)">Orta</button>
             <button type="button" class="fb-pri" data-v="Urgent" onclick="fbPri(this)">Acil</button>
           </div>
@@ -500,64 +795,16 @@
 
 <script>
   var FB_APP_NAME = 'OPCARD';
-
   var _fbPriority = '', _fbType = '';
-
   function fbToggle(){document.getElementById('fb-overlay').classList.contains('fb-open')?fbClose():fbOpen();}
   function fbOpen(){fbReset();document.getElementById('fb-overlay').classList.add('fb-open');}
   function fbClose(){document.getElementById('fb-overlay').classList.remove('fb-open');}
   function fbOverlayClick(e){if(e.target===document.getElementById('fb-overlay'))fbClose();}
-  function fbType(btn){
-    document.querySelectorAll('.fb-type').forEach(function(b){b.classList.remove('fb-sel');});
-    btn.classList.add('fb-sel'); _fbType=btn.getAttribute('data-v');
-    document.getElementById('fb-type-err').style.display='none';
-  }
-  function fbPri(btn){
-    document.querySelectorAll('.fb-pri').forEach(function(b){b.classList.remove('fb-sel');});
-    btn.classList.add('fb-sel'); _fbPriority=btn.getAttribute('data-v');
-    document.getElementById('fb-pri-err').style.display='none';
-  }
-  function fbReset(){
-    _fbPriority=''; _fbType='';
-    document.querySelectorAll('.fb-pri,.fb-type').forEach(function(b){b.classList.remove('fb-sel');});
-    document.getElementById('fb-message').value='';
-    document.getElementById('fb-message').classList.remove('fb-err');
-    ['fb-type-err','fb-pri-err','fb-msg-err'].forEach(function(id){
-      document.getElementById(id).style.display='none';
-    });
-    document.getElementById('fb-form-wrap').style.display='';
-    document.getElementById('fb-success').style.display='none';
-    var btn=document.getElementById('fb-submit-btn');
-    btn.disabled=false; btn.textContent='Gönder';
-  }
-  function fbSubmit(){
-    var msg=document.getElementById('fb-message').value.trim();
-    var ok=true;
-    if(!_fbType){document.getElementById('fb-type-err').style.display='block';ok=false;}
-    if(!_fbPriority){document.getElementById('fb-pri-err').style.display='block';ok=false;}
-    if(!msg){
-      document.getElementById('fb-message').classList.add('fb-err');
-      document.getElementById('fb-msg-err').style.display='block'; ok=false;
-    } else {
-      document.getElementById('fb-message').classList.remove('fb-err');
-      document.getElementById('fb-msg-err').style.display='none';
-    }
-    if(!ok) return;
-    var btn=document.getElementById('fb-submit-btn');
-    btn.disabled=true; btn.textContent='Gönderiliyor...';
-    google.script.run
-      .withSuccessHandler(function(){
-        document.getElementById('fb-form-wrap').style.display='none';
-        document.getElementById('fb-success').style.display='block';
-        setTimeout(fbClose, 2200);
-      })
-      .withFailureHandler(function(err){
-        btn.disabled=false; btn.textContent='Gönder';
-        alert('Hata: '+(err.message||err));
-      })
-      .submitFeedback({appName:FB_APP_NAME, feedbackType:_fbType, priority:_fbPriority, message:msg});
-  }
-  document.addEventListener('keydown', function(e){if(e.key==='Escape') fbClose();});
+  function fbType(btn){document.querySelectorAll('.fb-type').forEach(function(b){b.classList.remove('fb-sel');});btn.classList.add('fb-sel');_fbType=btn.getAttribute('data-v');document.getElementById('fb-type-err').style.display='none';}
+  function fbPri(btn){document.querySelectorAll('.fb-pri').forEach(function(b){b.classList.remove('fb-sel');});btn.classList.add('fb-sel');_fbPriority=btn.getAttribute('data-v');document.getElementById('fb-pri-err').style.display='none';}
+  function fbReset(){_fbPriority='';_fbType='';document.querySelectorAll('.fb-pri,.fb-type').forEach(function(b){b.classList.remove('fb-sel');});document.getElementById('fb-message').value='';document.getElementById('fb-message').classList.remove('fb-err');['fb-type-err','fb-pri-err','fb-msg-err'].forEach(function(id){document.getElementById(id).style.display='none';});document.getElementById('fb-form-wrap').style.display='';document.getElementById('fb-success').style.display='none';var btn=document.getElementById('fb-submit-btn');btn.disabled=false;btn.textContent='Gönder';}
+  function fbSubmit(){var msg=document.getElementById('fb-message').value.trim(),ok=true;if(!_fbType){document.getElementById('fb-type-err').style.display='block';ok=false;}if(!_fbPriority){document.getElementById('fb-pri-err').style.display='block';ok=false;}if(!msg){document.getElementById('fb-message').classList.add('fb-err');document.getElementById('fb-msg-err').style.display='block';ok=false;}else{document.getElementById('fb-message').classList.remove('fb-err');document.getElementById('fb-msg-err').style.display='none';}if(!ok)return;var btn=document.getElementById('fb-submit-btn');btn.disabled=true;btn.textContent='Gönderiliyor...';google.script.run.withSuccessHandler(function(){document.getElementById('fb-form-wrap').style.display='none';document.getElementById('fb-success').style.display='block';setTimeout(fbClose,2200);}).withFailureHandler(function(err){btn.disabled=false;btn.textContent='Gönder';alert('Hata: '+(err.message||err));}).submitFeedback({appName:FB_APP_NAME,feedbackType:_fbType,priority:_fbPriority,message:msg});}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')fbClose();});
 </script>
 </body>
 </html>
