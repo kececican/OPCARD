@@ -6,11 +6,126 @@
   <style>
     body { background: #f8f9fa; padding: 20px; font-family: sans-serif; }
     .nav-tabs .nav-link { font-weight: bold; }
-    .excel-preview { width: 100%; border: 2px solid #ccc; background: white; font-size: 12px; }
-    .excel-preview td { border: 1px solid #ddd; padding: 5px; }
-    .header-row { background: #eee; font-weight: bold; text-align: center; }
     /* Sidebar collapsed: version badge gizle */
     #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
+
+    /* Operasyon Kartı */
+    .op-card {
+      background: #fff;
+      border: 2px solid #1a3a6b;
+      border-radius: 8px;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      max-width: 720px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .op-card-header {
+      background: linear-gradient(135deg, #1a3a6b, #0052cc);
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .op-card-header .title { font-size: 18px; font-weight: 700; letter-spacing: .04em; }
+    .op-card-header .ref-badge {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .op-card-meta {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .op-card-meta-item {
+      padding: 10px 14px;
+      border-right: 1px solid #e2e8f0;
+    }
+    .op-card-meta-item:last-child { border-right: none; }
+    .op-card-meta-item .meta-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+    .op-card-meta-item .meta-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .op-card-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      min-height: 180px;
+    }
+    .op-card-steps {
+      padding: 16px 20px;
+      border-right: 1px solid #e2e8f0;
+    }
+    .op-card-steps .steps-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .op-card-steps ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .op-card-steps ol li {
+      font-size: 13px;
+      color: #1e293b;
+      padding: 4px 0;
+      border-bottom: 1px dashed #f1f5f9;
+    }
+    .op-card-steps ol li:last-child { border-bottom: none; }
+    .op-card-photo {
+      width: 180px;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      padding: 12px;
+    }
+    .op-card-photo img {
+      max-width: 156px;
+      max-height: 160px;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    .op-card-photo .no-photo {
+      color: #cbd5e1;
+      font-size: 12px;
+      text-align: center;
+    }
+    .op-card-footer {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .op-card-footer .footer-label { font-size: 10px; color: #94a3b8; }
+    .op-card-footer .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+    }
   </style>
 </head>
 <body>
@@ -97,7 +212,7 @@
             <input type="text" class="form-control mb-2 s-in" placeholder="Adım 2">
             <input type="text" class="form-control mb-2 s-in" placeholder="Adım 3">
           </div>
-          <button type="submit" class="btn btn-primary mt-3">Excel Ön İzleme</button>
+          <button type="submit" class="btn btn-primary mt-3">🔍 Kartı Önizle</button>
         </form>
       </div>
     </div>
@@ -106,17 +221,58 @@
   <div class="modal fade" id="pModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header bg-success text-white"><h5>Excel Format Ön İzleme</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-        <div class="modal-body">
-          <table class="excel-preview">
-            <tr class="header-row"><td>A4</td><td>B4</td><td>C</td><td>D</td><td>E</td></tr>
-            <tr><td id="pMamul"></td><td id="pRef"></td><td></td><td></td><td></td></tr>
-            <tr class="header-row"><td>A6 (OP)</td><td>B6 (AD)</td><td>C6 (HT)</td><td>D6 (MK)</td><td>E6 (PR)</td></tr>
-            <tr><td id="pOpNo"></td><td id="pOpAdi"></td><td id="pHat"></td><td id="pMak"></td><td id="pPar"></td></tr>
-            <tr><td colspan="3" id="pSteps"></td><td colspan="2" class="text-center"><img id="pImg" style="max-width:150px; display:none;"></td></tr>
-          </table>
+        <div class="modal-header" style="background:#1a3a6b;">
+          <h5 class="modal-title text-white">📋 Operasyon Kartı Önizleme</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-footer"><button class="btn btn-success" id="btnDl" onclick="finalSave()">💾 Onayla ve İndir</button></div>
+        <div class="modal-body" style="background:#f1f5f9;padding:24px;">
+          <div class="op-card">
+            <div class="op-card-header">
+              <span class="title" id="pMamul"></span>
+              <span class="ref-badge" id="pRef"></span>
+            </div>
+            <div class="op-card-meta">
+              <div class="op-card-meta-item">
+                <div class="meta-label">OP No</div>
+                <div class="meta-value" id="pOpNo"></div>
+              </div>
+              <div class="op-card-meta-item">
+                <div class="meta-label">Operasyon</div>
+                <div class="meta-value" id="pOpAdi"></div>
+              </div>
+              <div class="op-card-meta-item">
+                <div class="meta-label">Hat</div>
+                <div class="meta-value" id="pHat"></div>
+              </div>
+              <div class="op-card-meta-item">
+                <div class="meta-label">Makine</div>
+                <div class="meta-value" id="pMak"></div>
+              </div>
+              <div class="op-card-meta-item">
+                <div class="meta-label">Parametre</div>
+                <div class="meta-value" id="pPar"></div>
+              </div>
+            </div>
+            <div class="op-card-body">
+              <div class="op-card-steps">
+                <div class="steps-label">Operasyon Adımları</div>
+                <ol id="pSteps"></ol>
+              </div>
+              <div class="op-card-photo">
+                <img id="pImg" style="display:none;">
+                <div class="no-photo" id="pNoPhoto">📷<br>Fotoğraf yok</div>
+              </div>
+            </div>
+            <div class="op-card-footer">
+              <span class="footer-label">OPCARD · Operasyon Tanım Kartı</span>
+              <span class="status-badge">Taslak</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Düzenle</button>
+          <button class="btn btn-success" id="btnDl" onclick="finalSave()">💾 Onayla ve Excel İndir</button>
+        </div>
       </div>
     </div>
   </div>
@@ -180,21 +336,27 @@
     }
 
     function showPreview() {
-      document.getElementById('pMamul').innerText = document.getElementById('fMamul').value;
-      document.getElementById('pRef').innerText = document.getElementById('fRef').value;
-      document.getElementById('pOpNo').innerText = document.getElementById('fOpNo').value;
-      document.getElementById('pOpAdi').innerText = document.getElementById('fOpAdi').value;
-      document.getElementById('pHat').innerText = document.getElementById('fHat').value;
-      document.getElementById('pMak').innerText = document.getElementById('fMak').value;
-      document.getElementById('pPar').innerText = document.getElementById('fPar').value;
-      
-      let steps = "";
-      document.querySelectorAll('.s-in').forEach(i => { if(i.value) steps += "• " + i.value + "<br>"; });
-      document.getElementById('pSteps').innerHTML = steps;
+      document.getElementById('pMamul').innerText = document.getElementById('fMamul').value || '—';
+      document.getElementById('pRef').innerText   = document.getElementById('fRef').value   || '—';
+      document.getElementById('pOpNo').innerText  = document.getElementById('fOpNo').value  || '—';
+      document.getElementById('pOpAdi').innerText = document.getElementById('fOpAdi').value || '—';
+      document.getElementById('pHat').innerText   = document.getElementById('fHat').value   || '—';
+      document.getElementById('pMak').innerText   = document.getElementById('fMak').value   || '—';
+      document.getElementById('pPar').innerText   = document.getElementById('fPar').value   || '—';
+
+      let stepsHtml = '';
+      document.querySelectorAll('.s-in').forEach(i => {
+        if(i.value.trim()) stepsHtml += '<li>' + i.value.trim() + '</li>';
+      });
+      document.getElementById('pSteps').innerHTML = stepsHtml || '<li style="color:#94a3b8;list-style:none;">Adım girilmedi</li>';
 
       if(imgStore.b64) {
         document.getElementById('pImg').src = imgStore.b64;
-        document.getElementById('pImg').style.display = "block";
+        document.getElementById('pImg').style.display = 'block';
+        document.getElementById('pNoPhoto').style.display = 'none';
+      } else {
+        document.getElementById('pImg').style.display = 'none';
+        document.getElementById('pNoPhoto').style.display = 'block';
       }
 
       let modal = new bootstrap.Modal(document.getElementById('pModal'));
