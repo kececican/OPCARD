@@ -56,7 +56,7 @@ Kullanıcı **"projeyi başlat"** veya **"modülleri entegre et"** dediğinde a�
 
 ```javascript
 // ─── Feedback Widget ───────────────────────────────────────────────────────────
-var FB_SHEET_ID = 'BURAYA_MERKEZI_SPREADSHEET_ID';  // ← güncelle
+var FB_SHEET_ID = '1ZdakLmkO8s57T-WU1MGuyMFitzRQxO5XxhuIL7UoMwI';  // ← güncelle
 
 function submitFeedback(payload) {
   var ss      = SpreadsheetApp.openById(FB_SHEET_ID);
@@ -203,7 +203,7 @@ function submitFeedback(payload) {
 </div>
 
 <script>
-  var FB_APP_NAME = 'BURAYA_PROJE_ADINI_YAZ';  // ← güncelle
+  var FB_APP_NAME = 'OPCARD';  // ← güncelle
 
   var _fbPriority = '', _fbType = '';
 
@@ -276,7 +276,7 @@ function submitFeedback(payload) {
 ```javascript
 // ─── Giriş/Çıkış Loglama ──────────────────────────────────────────────────────
 // FB_SHEET_ID Modül 1'de tanımlı — aynı değişkeni kullanır
-var PROJECT_NAME = 'BURAYA_PROJE_ADINI_YAZ';  // ← güncelle
+var PROJECT_NAME = 'OPCARD';  // ← güncelle
 var LOG_SHEET    = PROJECT_NAME + '_GirisLoglari';
 var TIMEOUT_MIN  = 10;
 
@@ -565,4 +565,13 @@ function majorDeploy()    { _kurulumYap('major'); }
 /* Sidebar collapsed: version badge gizle */
 #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
 ```
+
+
+### Valeo Logosu eklemek.
+<!-- Valeo Logo -->
+<div id="sidebar-logo" class="px-4 py-2 mb-1 overflow-hidden transition-all duration-300">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Valeo_Logo.svg/960px-Valeo_Logo.svg.png" 
+       alt="Valeo" 
+       class="w-full max-w-[160px] object-contain mx-auto block">
+</div>
 

@@ -9,9 +9,67 @@
     .excel-preview { width: 100%; border: 2px solid #ccc; background: white; font-size: 12px; }
     .excel-preview td { border: 1px solid #ddd; padding: 5px; }
     .header-row { background: #eee; font-weight: bold; text-align: center; }
+    /* Sidebar collapsed: version badge gizle */
+    #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
   </style>
 </head>
 <body>
+<!-- BETA BANNER -->
+<div id="beta-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;align-items:center;justify-content:space-between;padding:8px 24px;background:linear-gradient(90deg,#041b3c,#0052cc,#041b3c);border-bottom:1px solid rgba(118,255,3,.3);box-shadow:0 2px 8px rgba(0,0,0,.3);">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span style="font-size:10px;font-weight:800;letter-spacing:.1em;color:#041b3c;background:#76ff03;padding:2px 8px;border-radius:3px;">BETA</span>
+    <span style="color:#fff;font-size:13px;font-weight:600;">
+      Task Tracking Portal
+      <span id="bb-version" style="color:#76ff03;font-weight:700;"></span>
+      <span style="color:#cbd5e1;font-weight:400;"> — aktif geliştirme aşamasındadır. Geri bildiriminiz için</span>
+      <button onclick="fbToggle();betaBannerKapat();" style="background:none;border:none;cursor:pointer;font-size:13px;font-family:inherit;padding:0;color:#76ff03;text-decoration:underline;">Geri Bildirim</button>
+      <span style="color:#cbd5e1;font-weight:400;"> butonunu kullanın.</span>
+    </span>
+  </div>
+  <button onclick="betaBannerKapat();" style="background:none;border:none;cursor:pointer;color:#94a3b8;font-size:18px;margin-left:16px;">&#x2715;</button>
+</div>
+<script>
+  function betaBannerKapat() {
+    var b = document.getElementById('beta-banner');
+    var h = document.querySelector('header');
+    var s = document.getElementById('sidebar');
+    var m = document.getElementById('main-content');
+    b.style.display = 'none';
+    if(h) h.style.top = '';
+    if(s) s.style.top = '';
+    if(m) m.style.paddingTop = '';
+  }
+
+  function _applyVersionUI(info) {
+    var b  = document.getElementById('beta-banner');
+    var bv = document.getElementById('bb-version');
+    if(bv) bv.textContent = 'v' + info.version;
+    if(info.isBeta) {
+      b.style.display = 'flex';
+      var bh = b.offsetHeight || 40;
+      var h = document.querySelector('header');
+      var s = document.getElementById('sidebar');
+      var m = document.getElementById('main-content');
+      if(h) h.style.top = bh + 'px';
+      if(s) s.style.top = bh + 'px';
+      if(m) m.style.paddingTop = bh + 'px';
+    }
+    var vbv = document.getElementById('vb-version');
+    var vbl = document.getElementById('vb-beta-label');
+    if(vbv) vbv.textContent = 'v' + info.version + ' · ' + info.buildDate;
+    if(vbl) { if(info.isBeta) vbl.classList.remove('hidden'); else vbl.classList.add('hidden'); }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    google.script.run
+      .withSuccessHandler(_applyVersionUI)
+      .withFailureHandler(function(){
+        _applyVersionUI({ version:'1.0', buildDate:'', isBeta:true });
+      })
+      .getAppVersion();
+  });
+</script>
+
   <div class="container-fluid">
     <ul class="nav nav-tabs mb-4" id="tabs">
       <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#view">🔍 Mevcut Durum</button></li>
@@ -64,6 +122,52 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    var SESSION_ID = "<?= sessionId ?>";
+    var TIMEOUT_MS = <?= timeoutMin ?> * 60 * 1000;
+
+    var sessionStart = Date.now();
+    var hiddenAt     = null;
+    var exitLogged   = false;
+
+    function _logExit(exitTimestamp, durationMs) {
+      if (exitLogged) return;
+      exitLogged = true;
+      google.script.run.logExit(SESSION_ID, exitTimestamp, Math.round(durationMs / 1000));
+    }
+
+    function _newSession() {
+      exitLogged = false;
+      google.script.run
+        .withSuccessHandler(function(result) {
+          SESSION_ID   = result.sessionId;
+          sessionStart = Date.now();
+          hiddenAt     = null;
+        })
+        .createSession();
+    }
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'hidden') {
+        hiddenAt = Date.now();
+      } else {
+        if (hiddenAt === null) return;
+        var elapsed = Date.now() - hiddenAt;
+        if (elapsed >= TIMEOUT_MS) {
+          _logExit(hiddenAt, hiddenAt - sessionStart);
+          _newSession();
+        } else {
+          hiddenAt = null;
+        }
+      }
+    });
+
+    window.addEventListener('beforeunload', function() {
+      if (exitLogged) return;
+      var exitAt = hiddenAt !== null ? hiddenAt : Date.now();
+      _logExit(exitAt, exitAt - sessionStart);
+    });
+  </script>
   <script>
     let imgStore = { b64: "", name: "" };
     
@@ -120,5 +224,178 @@
       }).saveAndExportExcel(payload);
     }
   </script>
+
+<style>
+  #fb-btn{position:fixed;bottom:24px;left:20px;display:flex;align-items:center;gap:8px;
+    padding:10px 18px;background:#1E293B;color:#fff;border:none;border-radius:99px;
+    font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.25);
+    z-index:8000;transition:all .18s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  #fb-btn:hover{background:#0F172A;transform:translateY(-2px);}
+  #fb-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);
+    z-index:8001;align-items:flex-end;justify-content:flex-start;padding:0 0 80px 20px;}
+  #fb-overlay.fb-open{display:flex;}
+  #fb-box{background:#fff;border-radius:16px;width:340px;box-shadow:0 8px 32px rgba(0,0,0,.2);
+    overflow:hidden;animation:fbSlide .2s ease;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  @keyframes fbSlide{from{transform:translateY(16px);opacity:0}to{transform:translateY(0);opacity:1}}
+  #fb-head{display:flex;align-items:center;justify-content:space-between;
+    padding:14px 16px;border-bottom:1px solid #E2E8F0;}
+  #fb-head span{font-size:14px;font-weight:700;color:#1E293B;}
+  #fb-head button{background:none;border:none;font-size:17px;cursor:pointer;color:#94A3B8;
+    padding:2px 5px;border-radius:4px;line-height:1;}
+  #fb-head button:hover{background:#F1F5F9;color:#1E293B;}
+  #fb-body{padding:14px 16px;display:flex;flex-direction:column;gap:12px;}
+  .fb-label{font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;
+    letter-spacing:.06em;display:block;margin-bottom:5px;}
+  .fb-required{color:#EF4444;}
+  #fb-type-wrap,#fb-pri-wrap{display:flex;gap:6px;}
+  .fb-type,.fb-pri{flex:1;padding:8px 4px;border:2px solid #E2E8F0;border-radius:8px;
+    background:#fff;font-size:12px;font-weight:600;color:#64748B;cursor:pointer;
+    transition:all .14s;text-align:center;font-family:inherit;}
+  .fb-type:hover,.fb-pri:hover{border-color:#94A3B8;}
+  .fb-type[data-v="Bug"].fb-sel        {border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
+  .fb-type[data-v="Improvement"].fb-sel{border-color:#22C55E;background:#DCFCE7;color:#15803D;}
+  .fb-pri[data-v="Low"].fb-sel   {border-color:#3B82F6;background:#EFF6FF;color:#1D4ED8;}
+  .fb-pri[data-v="Medium"].fb-sel{border-color:#F59E0B;background:#FEF3C7;color:#92400E;}
+  .fb-pri[data-v="Urgent"].fb-sel{border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
+  #fb-type-err,#fb-pri-err,#fb-msg-err{color:#EF4444;font-size:11px;display:none;margin-top:4px;}
+  #fb-message{width:100%;padding:9px 11px;border:1px solid #E2E8F0;border-radius:8px;
+    font-size:13px;font-family:inherit;resize:vertical;min-height:90px;
+    outline:none;color:#1E293B;transition:border-color .14s;}
+  #fb-message:focus{border-color:#4A6CF7;}
+  #fb-message.fb-err{border-color:#EF4444;}
+  #fb-foot{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;
+    border-top:1px solid #E2E8F0;}
+  .fb-cancel{padding:8px 14px;border:1px solid #E2E8F0;border-radius:6px;background:#fff;
+    font-size:13px;font-weight:600;color:#64748B;cursor:pointer;font-family:inherit;}
+  .fb-cancel:hover{background:#F1F5F9;}
+  .fb-submit{padding:8px 16px;border:none;border-radius:6px;background:#4A6CF7;
+    color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .14s;}
+  .fb-submit:hover{background:#3A5AE0;}
+  .fb-submit:disabled{background:#94A3B8;cursor:not-allowed;}
+  #fb-success{display:none;padding:28px 16px;text-align:center;}
+  #fb-success .fb-ok-icon{font-size:38px;margin-bottom:8px;}
+  #fb-success strong{font-size:15px;color:#1E293B;display:block;}
+  #fb-success p{color:#64748B;font-size:13px;margin-top:5px;}
+  @media(max-width:600px){
+    #fb-btn{bottom:16px;left:12px;padding:9px 14px;font-size:12px;}
+    #fb-overlay{padding:0 0 68px 12px;}
+    #fb-box{width:calc(100vw - 24px);}
+  }
+</style>
+
+<button id="fb-btn" onclick="fbToggle()">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+       stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  Geri Bildirim
+</button>
+
+<div id="fb-overlay" onclick="fbOverlayClick(event)">
+  <div id="fb-box">
+    <div id="fb-head">
+      <span>Geri Bildirim</span>
+      <button onclick="fbClose()">&#x2715;</button>
+    </div>
+    <div id="fb-form-wrap">
+      <div id="fb-body">
+        <div>
+          <span class="fb-label">Tür <span class="fb-required">*</span></span>
+          <div id="fb-type-wrap">
+            <button type="button" class="fb-type" data-v="Bug"         onclick="fbType(this)">Bug</button>
+            <button type="button" class="fb-type" data-v="Improvement" onclick="fbType(this)">İyileştirme</button>
+          </div>
+          <div id="fb-type-err">Lütfen bir tür seçin.</div>
+        </div>
+        <div>
+          <span class="fb-label">Öncelik <span class="fb-required">*</span></span>
+          <div id="fb-pri-wrap">
+            <button type="button" class="fb-pri" data-v="Low"    onclick="fbPri(this)">Düşük</button>
+            <button type="button" class="fb-pri" data-v="Medium" onclick="fbPri(this)">Orta</button>
+            <button type="button" class="fb-pri" data-v="Urgent" onclick="fbPri(this)">Acil</button>
+          </div>
+          <div id="fb-pri-err">Lütfen bir öncelik seçin.</div>
+        </div>
+        <div>
+          <span class="fb-label">Mesaj <span class="fb-required">*</span></span>
+          <textarea id="fb-message" placeholder="Geri bildiriminizi yazın..."></textarea>
+          <div id="fb-msg-err">Lütfen mesajınızı girin.</div>
+        </div>
+      </div>
+      <div id="fb-foot">
+        <button class="fb-cancel" onclick="fbClose()">İptal</button>
+        <button class="fb-submit" id="fb-submit-btn" onclick="fbSubmit()">Gönder</button>
+      </div>
+    </div>
+    <div id="fb-success">
+      <div class="fb-ok-icon">&#x2705;</div>
+      <strong>Teşekkürler!</strong>
+      <p>Geri bildiriminiz kaydedildi.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  var FB_APP_NAME = 'OPCARD';
+
+  var _fbPriority = '', _fbType = '';
+
+  function fbToggle(){document.getElementById('fb-overlay').classList.contains('fb-open')?fbClose():fbOpen();}
+  function fbOpen(){fbReset();document.getElementById('fb-overlay').classList.add('fb-open');}
+  function fbClose(){document.getElementById('fb-overlay').classList.remove('fb-open');}
+  function fbOverlayClick(e){if(e.target===document.getElementById('fb-overlay'))fbClose();}
+  function fbType(btn){
+    document.querySelectorAll('.fb-type').forEach(function(b){b.classList.remove('fb-sel');});
+    btn.classList.add('fb-sel'); _fbType=btn.getAttribute('data-v');
+    document.getElementById('fb-type-err').style.display='none';
+  }
+  function fbPri(btn){
+    document.querySelectorAll('.fb-pri').forEach(function(b){b.classList.remove('fb-sel');});
+    btn.classList.add('fb-sel'); _fbPriority=btn.getAttribute('data-v');
+    document.getElementById('fb-pri-err').style.display='none';
+  }
+  function fbReset(){
+    _fbPriority=''; _fbType='';
+    document.querySelectorAll('.fb-pri,.fb-type').forEach(function(b){b.classList.remove('fb-sel');});
+    document.getElementById('fb-message').value='';
+    document.getElementById('fb-message').classList.remove('fb-err');
+    ['fb-type-err','fb-pri-err','fb-msg-err'].forEach(function(id){
+      document.getElementById(id).style.display='none';
+    });
+    document.getElementById('fb-form-wrap').style.display='';
+    document.getElementById('fb-success').style.display='none';
+    var btn=document.getElementById('fb-submit-btn');
+    btn.disabled=false; btn.textContent='Gönder';
+  }
+  function fbSubmit(){
+    var msg=document.getElementById('fb-message').value.trim();
+    var ok=true;
+    if(!_fbType){document.getElementById('fb-type-err').style.display='block';ok=false;}
+    if(!_fbPriority){document.getElementById('fb-pri-err').style.display='block';ok=false;}
+    if(!msg){
+      document.getElementById('fb-message').classList.add('fb-err');
+      document.getElementById('fb-msg-err').style.display='block'; ok=false;
+    } else {
+      document.getElementById('fb-message').classList.remove('fb-err');
+      document.getElementById('fb-msg-err').style.display='none';
+    }
+    if(!ok) return;
+    var btn=document.getElementById('fb-submit-btn');
+    btn.disabled=true; btn.textContent='Gönderiliyor...';
+    google.script.run
+      .withSuccessHandler(function(){
+        document.getElementById('fb-form-wrap').style.display='none';
+        document.getElementById('fb-success').style.display='block';
+        setTimeout(fbClose, 2200);
+      })
+      .withFailureHandler(function(err){
+        btn.disabled=false; btn.textContent='Gönder';
+        alert('Hata: '+(err.message||err));
+      })
+      .submitFeedback({appName:FB_APP_NAME, feedbackType:_fbType, priority:_fbPriority, message:msg});
+  }
+  document.addEventListener('keydown', function(e){if(e.key==='Escape') fbClose();});
+</script>
 </body>
 </html>
