@@ -43,9 +43,9 @@ Kullanıcı **"projeyi başlat"** veya **"modülleri entegre et"** dediğinde a�
 ### 5. Bitti — Kullanıcıya bildir
 
 > "Entegrasyon tamamlandı. Şu değişkenleri kendi bilginle güncelle:
-> Code.gs → FB_SHEET_ID (merkezi spreadsheet ID'si), PROJECT_NAME (proje adı)
-> Index.html → FB_APP_NAME (feedback sheet'indeki sekme adı)
-
+> - `Code.gs` → `FB_SHEET_ID`, `PROJECT_NAME`
+> - `Index.html` → `FB_APP_NAME`
+>
 > Güncellemeler bittikten sonra `SETUP_CLAUDE.md` dosyasını silebilirsin."
 
 ---
@@ -565,4 +565,13 @@ function majorDeploy()    { _kurulumYap('major'); }
 /* Sidebar collapsed: version badge gizle */
 #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
 ```
+
+
+### Valeo Logosu eklemek.
+<!-- Valeo Logo -->
+<div id="sidebar-logo" class="px-4 py-2 mb-1 overflow-hidden transition-all duration-300">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Valeo_Logo.svg/960px-Valeo_Logo.svg.png" 
+       alt="Valeo" 
+       class="w-full max-w-[160px] object-contain mx-auto block">
+</div>
 
