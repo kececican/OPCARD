@@ -151,40 +151,53 @@ function getOperationData() {
 
 function saveAndExportExcel(formData) {
   try {
-    let imageUrl = "";
-    if (formData.imageBase64) {
-      const blob = dataURItoBlob(formData.imageBase64, formData.imageName);
-      const folder = DriveApp.getRootFolder();
-      const file = folder.createFile(blob);
-      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      imageUrl = file.getUrl();
+    // Upload photos to Drive and get URLs
+    var photoUrls = [];
+    var photosArr = formData.photos || [];
+    for (var pi = 0; pi < photosArr.length; pi++) {
+      if (photosArr[pi] && photosArr[pi].b64) {
+        var blob = dataURItoBlob(photosArr[pi].b64, photosArr[pi].name || ('foto_' + (pi+1) + '.jpg'));
+        var file = DriveApp.getRootFolder().createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        photoUrls.push(file.getUrl());
+      } else {
+        photoUrls.push('');
+      }
     }
 
-    const currentSs = SpreadsheetApp.getActiveSpreadsheet();
-    const templateSheet = currentSs.getSheets()[0];
-    const tempSs = SpreadsheetApp.create("OP_" + formData.referans);
-    const newSheet = templateSheet.copyTo(tempSs);
+    var currentSs = SpreadsheetApp.getActiveSpreadsheet();
+    var templateSheet = currentSs.getSheets()[0];
+    var tempSs = SpreadsheetApp.create("OP_" + formData.referans);
+    var newSheet = templateSheet.copyTo(tempSs);
     newSheet.setName(formData.referans);
-    
     if (tempSs.getSheetByName("Sayfa1")) tempSs.deleteSheet(tempSs.getSheetByName("Sayfa1"));
     if (tempSs.getSheetByName("Sheet1")) tempSs.deleteSheet(tempSs.getSheetByName("Sheet1"));
 
+    // Temel bilgiler
     newSheet.getRange("A4").setValue(formData.mamulAdi);
     newSheet.getRange("B4").setValue(formData.referans);
+
+    // Operasyon bilgileri
     newSheet.getRange("A6").setValue(formData.opNo);
     newSheet.getRange("B6").setValue(formData.opAdi);
     newSheet.getRange("C6").setValue(formData.hatAdi);
-    newSheet.getRange("D6").setValue(formData.makineNo);
-    newSheet.getRange("E6").setValue(formData.parametre);
-    
-    formData.adimlar.forEach((adim, i) => {
-      let cells = ["B10", "A14", "A15", "A17", "A20"];
-      if(adim) newSheet.getRange(cells[i]).setValue(adim);
-    });
-    
-    if(imageUrl) newSheet.getRange("D10").setFormula(`=IMAGE("${imageUrl}")`);
+    newSheet.getRange("D6").setValue(formData.makineAdi || formData.makineNo);
+    newSheet.getRange("E6").setValue(formData.ayar || formData.parametre);
 
-    const downloadUrl = "https://docs.google.com/spreadsheets/d/" + tempSs.getId() + "/export?format=xlsx";
+    // Operasyon adımları
+    var adimCells = ["B10", "A14", "A15", "A17", "A20"];
+    var adimlar = formData.adimlar || [];
+    adimlar.forEach(function(adim, i) {
+      if (adim && adimCells[i]) newSheet.getRange(adimCells[i]).setValue(adim);
+    });
+
+    // Fotoğraflar
+    var imgCells = ["D10", "F10", "H10", "D16", "F16"];
+    photoUrls.forEach(function(url, i) {
+      if (url && imgCells[i]) newSheet.getRange(imgCells[i]).setFormula('=IMAGE("' + url + '")');
+    });
+
+    var downloadUrl = "https://docs.google.com/spreadsheets/d/" + tempSs.getId() + "/export?format=xlsx";
     return { success: true, downloadUrl: downloadUrl };
   } catch (e) {
     return { success: false, error: e.toString() };
