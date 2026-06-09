@@ -94,6 +94,44 @@ function _getOrCreateLogSheet() {
   return sheet;
 }
 
+// ─── Versiyon Yönetimi ────────────────────────────────────────────────────────
+
+function getAppVersion() {
+  var props = PropertiesService.getScriptProperties();
+  return {
+    version:   props.getProperty('APP_VERSION')    || '1.0',
+    buildDate: props.getProperty('APP_BUILD_DATE') || '',
+    isBeta:    props.getProperty('APP_IS_BETA')    !== 'false'
+  };
+}
+
+function bumpVersion(type) {
+  var props   = PropertiesService.getScriptProperties();
+  var current = props.getProperty('APP_VERSION') || '1.0';
+  var parts   = current.split('.').map(Number);
+  if (type === 'major') { parts[0]++; parts[1] = 0; }
+  else                  { parts[1]++; }
+  var next      = parts[0] + '.' + parts[1];
+  var buildDate = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyy-MM-dd');
+  props.setProperty('APP_VERSION',    next);
+  props.setProperty('APP_BUILD_DATE', buildDate);
+  Logger.log('Versiyon: ' + next + ' (' + buildDate + ')');
+  return { version: next, buildDate: buildDate };
+}
+
+function setBeta(flag) {
+  PropertiesService.getScriptProperties().setProperty('APP_IS_BETA', flag ? 'true' : 'false');
+  Logger.log('Beta modu: ' + (flag ? 'AÇIK' : 'KAPALI'));
+}
+
+function _kurulumYap(bumpType) {
+  bumpVersion(bumpType);
+}
+
+function kurulumTrigger() { _kurulumYap('minor'); }
+
+function majorDeploy()    { _kurulumYap('major'); }
+
 function getOperationData() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheets()[0]; 

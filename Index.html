@@ -9,9 +9,69 @@
     .excel-preview { width: 100%; border: 2px solid #ccc; background: white; font-size: 12px; }
     .excel-preview td { border: 1px solid #ddd; padding: 5px; }
     .header-row { background: #eee; font-weight: bold; text-align: center; }
+    /* Sidebar collapsed: version badge gizle */
+    #sidebar.collapsed #version-badge { width:0; opacity:0; height:0; padding:0; margin:0; }
   </style>
 </head>
 <body>
+<!-- BETA BANNER -->
+<div id="beta-banner" class="fixed top-0 left-0 right-0 z-[9999] items-center justify-between px-6 py-2.5 bg-gradient-to-r from-[#041b3c] via-[#0052cc] to-[#041b3c] border-b border-[#76ff03]/30 shadow-lg" style="display:none;">
+  <div class="flex items-center gap-3">
+    <span class="text-[10px] font-extrabold tracking-widest text-[#041b3c] bg-[#76ff03] px-2 py-0.5 rounded-sm">BETA</span>
+    <span class="text-white text-xs font-semibold">
+      Task Tracking Portal
+      <span id="bb-version" class="text-[#76ff03] font-bold"></span>
+      <span class="text-slate-300 font-normal">— aktif geliştirme aşamasındadır. Geri bildiriminiz için</span>
+      <button onclick="fbToggle();betaBannerKapat();" class="underline text-[#76ff03] hover:text-white transition-colors" style="background:none;border:none;cursor:pointer;font-size:inherit;font-family:inherit;padding:0;">Geri Bildirim</button>
+      <span class="text-slate-300 font-normal">butonunu kullanın.</span>
+    </span>
+  </div>
+  <button onclick="betaBannerKapat();" class="text-slate-400 hover:text-white transition-colors ml-4 flex-shrink-0" style="background:none;border:none;cursor:pointer;">
+    <span style="font-size:18px;">&#x2715;</span>
+  </button>
+</div>
+<script>
+  function betaBannerKapat() {
+    var b = document.getElementById('beta-banner');
+    var h = document.querySelector('header');
+    var s = document.getElementById('sidebar');
+    var m = document.getElementById('main-content');
+    b.style.display = 'none';
+    if(h) h.style.top = '';
+    if(s) s.style.top = '';
+    if(m) m.style.paddingTop = '';
+  }
+
+  function _applyVersionUI(info) {
+    var b  = document.getElementById('beta-banner');
+    var bv = document.getElementById('bb-version');
+    if(bv) bv.textContent = 'v' + info.version;
+    if(info.isBeta) {
+      b.style.display = 'flex';
+      var bh = b.offsetHeight || 40;
+      var h = document.querySelector('header');
+      var s = document.getElementById('sidebar');
+      var m = document.getElementById('main-content');
+      if(h) h.style.top = bh + 'px';
+      if(s) s.style.top = bh + 'px';
+      if(m) m.style.paddingTop = bh + 'px';
+    }
+    var vbv = document.getElementById('vb-version');
+    var vbl = document.getElementById('vb-beta-label');
+    if(vbv) vbv.textContent = 'v' + info.version + ' · ' + info.buildDate;
+    if(vbl) { if(info.isBeta) vbl.classList.remove('hidden'); else vbl.classList.add('hidden'); }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    google.script.run
+      .withSuccessHandler(_applyVersionUI)
+      .withFailureHandler(function(){
+        _applyVersionUI({ version:'1.0', buildDate:'', isBeta:true });
+      })
+      .getAppVersion();
+  });
+</script>
+
   <div class="container-fluid">
     <ul class="nav nav-tabs mb-4" id="tabs">
       <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#view">🔍 Mevcut Durum</button></li>
