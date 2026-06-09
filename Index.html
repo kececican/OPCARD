@@ -15,20 +15,18 @@
 </head>
 <body>
 <!-- BETA BANNER -->
-<div id="beta-banner" class="fixed top-0 left-0 right-0 z-[9999] items-center justify-between px-6 py-2.5 bg-gradient-to-r from-[#041b3c] via-[#0052cc] to-[#041b3c] border-b border-[#76ff03]/30 shadow-lg" style="display:none;">
-  <div class="flex items-center gap-3">
-    <span class="text-[10px] font-extrabold tracking-widest text-[#041b3c] bg-[#76ff03] px-2 py-0.5 rounded-sm">BETA</span>
-    <span class="text-white text-xs font-semibold">
+<div id="beta-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;align-items:center;justify-content:space-between;padding:8px 24px;background:linear-gradient(90deg,#041b3c,#0052cc,#041b3c);border-bottom:1px solid rgba(118,255,3,.3);box-shadow:0 2px 8px rgba(0,0,0,.3);">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span style="font-size:10px;font-weight:800;letter-spacing:.1em;color:#041b3c;background:#76ff03;padding:2px 8px;border-radius:3px;">BETA</span>
+    <span style="color:#fff;font-size:13px;font-weight:600;">
       Task Tracking Portal
-      <span id="bb-version" class="text-[#76ff03] font-bold"></span>
-      <span class="text-slate-300 font-normal">— aktif geliştirme aşamasındadır. Geri bildiriminiz için</span>
-      <button onclick="fbToggle();betaBannerKapat();" class="underline text-[#76ff03] hover:text-white transition-colors" style="background:none;border:none;cursor:pointer;font-size:inherit;font-family:inherit;padding:0;">Geri Bildirim</button>
-      <span class="text-slate-300 font-normal">butonunu kullanın.</span>
+      <span id="bb-version" style="color:#76ff03;font-weight:700;"></span>
+      <span style="color:#cbd5e1;font-weight:400;"> — aktif geliştirme aşamasındadır. Geri bildiriminiz için</span>
+      <button onclick="fbToggle();betaBannerKapat();" style="background:none;border:none;cursor:pointer;font-size:13px;font-family:inherit;padding:0;color:#76ff03;text-decoration:underline;">Geri Bildirim</button>
+      <span style="color:#cbd5e1;font-weight:400;"> butonunu kullanın.</span>
     </span>
   </div>
-  <button onclick="betaBannerKapat();" class="text-slate-400 hover:text-white transition-colors ml-4 flex-shrink-0" style="background:none;border:none;cursor:pointer;">
-    <span style="font-size:18px;">&#x2715;</span>
-  </button>
+  <button onclick="betaBannerKapat();" style="background:none;border:none;cursor:pointer;color:#94a3b8;font-size:18px;margin-left:16px;">&#x2715;</button>
 </div>
 <script>
   function betaBannerKapat() {
