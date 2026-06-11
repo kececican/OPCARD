@@ -338,7 +338,7 @@
             <td class="cell-talimat" style="font-size:9px;">Revizyon Tarihi:</td>
           </tr>
 
-          <!-- ── ROW 4: Parça 1 + Kalıp 1 ── -->
+          <!-- ── ROW 4: Parça 1 + Kalıp 1 + Uygunsuzluk başlar (rowspan=9) ── -->
           <tr>
             <td style="font-size:10px;" id="pv-p1a"></td>
             <td style="font-size:10px;" id="pv-p1r"></td>
@@ -348,10 +348,12 @@
             <td style="font-size:10px;text-align:center;" id="pv-p2d"></td>
             <td style="font-size:10px;" id="pv-k1a"></td>
             <td style="font-size:10px;" id="pv-k1r"></td>
-            <td></td>
+            <td class="uygunsuzluk-cell" rowspan="9" style="font-size:10px;line-height:1.6;vertical-align:top;padding-top:10px;">
+              UYGUNSUZLUK<br>DURUMUNDA<br>KULLANILACAK<br>REAKSİYON<br>MATRİSİ
+            </td>
           </tr>
 
-          <!-- ── ROW 5: OP sütun başlıkları + Parça 2 + Uygunsuzluk (rowspan 4) ── -->
+          <!-- ── ROW 5: OP sütun başlıkları + Parça 2 ── -->
           <tr>
             <td class="cell-op-label" style="font-size:9px;">OP.NO</td>
             <td colspan="2" class="cell-op-label" style="font-size:9px;">OPERASYON ADI</td>
@@ -363,9 +365,7 @@
             <td style="font-size:10px;" id="pv-p3r"></td>
             <td style="font-size:10px;text-align:center;" id="pv-p3d"></td>
             <td style="font-size:10px;" id="pv-k2a"></td>
-            <td class="uygunsuzluk-cell" rowspan="4" style="font-size:10px;line-height:1.6;">
-              UYGUNSUZLUK<br>DURUMUNDA<br>KULLANILACAK<br>REAKSİYON<br>MATRİSİ
-            </td>
+            <!-- col 14: uygunsuzluk rowspan devam -->
           </tr>
 
           <!-- ── ROW 6: OP değerleri + Parça 3 ── -->
@@ -380,9 +380,10 @@
             <td style="font-size:10px;" id="pv-p4r"></td>
             <td style="font-size:10px;text-align:center;" id="pv-p4d"></td>
             <td style="font-size:10px;" id="pv-k2r"></td>
+            <!-- col 14: uygunsuzluk rowspan devam -->
           </tr>
 
-          <!-- ── ROW 7: Adım kolon başlıkları + Parça 4 ── -->
+          <!-- ── ROW 7: Adım kolon başlıkları + Parça 5 ── -->
           <tr>
             <td class="cell-header" style="font-size:9px;">NO</td>
             <td colspan="3" class="cell-header" style="font-size:9px;">OPERASYON TANIMLAMA</td>
@@ -391,7 +392,7 @@
             <td style="font-size:10px;" id="pv-p5a"></td>
             <td style="font-size:10px;" id="pv-p5r"></td>
             <td style="font-size:10px;text-align:center;" id="pv-p5d"></td>
-            <td></td>
+            <!-- col 14: uygunsuzluk rowspan devam -->
           </tr>
 
           <!-- ── ROW 8: Adım 1 — Fotoğraf 1-2-3 rowspan 3 başlar ── -->
@@ -409,12 +410,12 @@
               <div class="preview-photo-placeholder" id="pv-nophoto-1">Foto 2</div>
               <img id="pv-photo-1" class="preview-photo" style="display:none;">
             </td>
-            <td class="photo-cell" rowspan="3" colspan="2">
+            <td class="photo-cell" rowspan="3" colspan="3">
               <div class="photo-circle">3</div>
               <div class="preview-photo-placeholder" id="pv-nophoto-2">Foto 3</div>
               <img id="pv-photo-2" class="preview-photo" style="display:none;">
             </td>
-            <td></td>
+            <!-- col 14: uygunsuzluk rowspan devam -->
           </tr>
 
           <!-- ── ROW 9: Adım 2 ── -->
@@ -422,7 +423,6 @@
             <td class="cell-no" id="pv-s2-no"></td>
             <td colspan="3" class="cell-step" id="pv-s2-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
             <td colspan="3" class="cell-step" id="pv-s2-acik" style="font-size:10px;vertical-align:top;"></td>
-            <td></td>
           </tr>
 
           <!-- ── ROW 10: Adım 3 ── -->
@@ -430,7 +430,6 @@
             <td class="cell-no" id="pv-s3-no"></td>
             <td colspan="3" class="cell-step" id="pv-s3-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
             <td colspan="3" class="cell-step" id="pv-s3-acik" style="font-size:10px;vertical-align:top;"></td>
-            <td></td>
           </tr>
 
           <!-- ── ROW 11: Adım 4 — Fotoğraf 4-5 rowspan 2 başlar ── -->
@@ -449,7 +448,6 @@
               <img id="pv-photo-4" class="preview-photo" style="display:none;">
             </td>
             <td colspan="2" rowspan="2"></td>
-            <td></td>
           </tr>
 
           <!-- ── ROW 12: Adım 5 ── -->
@@ -457,7 +455,6 @@
             <td class="cell-no" id="pv-s5-no"></td>
             <td colspan="3" class="cell-step" id="pv-s5-tanim" style="padding:5px 6px;vertical-align:top;min-height:28px;"></td>
             <td colspan="3" class="cell-step" id="pv-s5-acik" style="font-size:10px;vertical-align:top;"></td>
-            <td></td>
           </tr>
 
           <!-- ── Kontrol Noktaları Başlık ── -->
