@@ -303,13 +303,13 @@
         -->
         <table style="width:100%;border-collapse:collapse;font-size:11px;background:#fff;table-layout:fixed;">
           <colgroup>
-            <col style="width:68px">
-            <col style="width:50px"><col style="width:50px"><col style="width:65px">
-            <col style="width:62px">
-            <col style="width:62px"><col style="width:55px"><col style="width:28px">
-            <col style="width:62px"><col style="width:55px"><col style="width:28px">
-            <col style="width:72px"><col style="width:60px">
-            <col style="width:82px"><col style="width:72px">
+            <col style="width:64px">
+            <col style="width:46px"><col style="width:46px"><col style="width:60px">
+            <col style="width:58px">
+            <col style="width:72px"><col style="width:62px"><col style="width:30px">
+            <col style="width:72px"><col style="width:62px"><col style="width:30px">
+            <col style="width:72px"><col style="width:58px">
+            <col style="width:76px"><col style="width:68px">
           </colgroup>
 
           <!-- ═══ ROW 1: Logo + Başlık + Talimat No etiketi/değeri ═══ -->
@@ -336,74 +336,74 @@
           </tr>
 
           <!-- ═══ ROW 3: Mamul değerleri + parça alt-başlıkları + Revizyon Tarihi ═══ -->
-          <tr>
+          <tr style="height:24px;">
             <td colspan="3" rowspan="2" style="text-align:center;vertical-align:middle;font-size:12px;font-weight:700;border:1px solid #bbb;" id="pv-mamul"></td>
             <td rowspan="2" style="text-align:center;vertical-align:middle;font-size:11px;font-weight:700;border:1px solid #bbb;" id="pv-ref"></td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">ADI</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">REFERANS</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">ADET</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">ADI</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">REFERANS</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">ADET</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">ADI</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">REFERANS</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">REVİZYON TARİHİ</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">ADI</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">REFERANS</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">ADET</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">ADI</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">REFERANS</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">ADET</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">ADI</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">REFERANS</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:3px 2px;border:1px solid #bbb;">REVİZYON TARİHİ</td>
             <td style="border:1px solid #bbb;"></td>
           </tr>
 
-          <!-- ═══ ROW 4: Parça 1 satırı ═══ -->
-          <tr>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p1a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p1r"></td>
-            <td style="font-size:10px;text-align:center;border:1px solid #bbb;" id="pv-p1d"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p2a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p2r"></td>
-            <td style="font-size:10px;text-align:center;border:1px solid #bbb;" id="pv-p2d"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-k1a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-k1r"></td>
+          <!-- ═══ ROW 4: Parça data satırları (logo+mamul+ref rowspan=5 covers rows 3-7) ═══ -->
+          <tr style="height:38px;">
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p1a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p1r"></td>
+            <td style="font-size:10px;text-align:center;padding:5px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-p1d"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p2a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p2r"></td>
+            <td style="font-size:10px;text-align:center;padding:5px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-p2d"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-k1a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-k1r"></td>
             <td colspan="2" style="border:1px solid #bbb;"></td>
           </tr>
 
           <!-- ═══ ROW 5: OP Başlıkları + Parça 2 + Uygunsuzluk (rowspan=8) ═══ -->
-          <tr>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">OP.NO</td>
-            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">OPERASYON ADI</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">HAT ADI</td>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">MAKİNE ADI</td>
-            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">MAKİNE NO :</td>
-            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">MAK. / KALIP AYARI</td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p3a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p3r"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p3d"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-k2a"></td>
+          <tr style="height:38px;">
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">OP.NO</td>
+            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">OPERASYON ADI</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">HAT ADI</td>
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">MAKİNE ADI</td>
+            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">MAKİNE NO :</td>
+            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">MAK. / KALIP AYARI</td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p3a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p3r"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p3d"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-k2a"></td>
             <td colspan="2" rowspan="8" style="text-align:center;vertical-align:middle;background:#ffff00;font-size:10px;font-weight:700;border:1px solid #bbb;line-height:1.8;">
               UYGUNSUZLUK<br>DURUMUNDA<br>KULLANILACAK<br>REAKSİYON<br>MATRİSİ
             </td>
           </tr>
 
-          <!-- ═══ ROW 6: OP Değerleri + Parça 3 ═══ -->
-          <tr>
-            <td style="font-size:13px;font-weight:700;text-align:center;border:1px solid #bbb;" id="pv-opno"></td>
-            <td colspan="2" style="font-size:11px;font-weight:700;text-align:center;border:1px solid #bbb;" id="pv-opadi"></td>
-            <td style="font-size:11px;border:1px solid #bbb;" id="pv-hat"></td>
-            <td style="font-size:11px;border:1px solid #bbb;" id="pv-makadi"></td>
-            <td colspan="2" style="font-size:11px;border:1px solid #bbb;" id="pv-makno"></td>
-            <td colspan="2" style="font-size:11px;white-space:pre-line;border:1px solid #bbb;" id="pv-ayar"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p4a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p4r"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p4d"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-k2r"></td>
+          <!-- ═══ ROW 6: OP Değerleri + Parça 4 ═══ -->
+          <tr style="height:38px;">
+            <td style="font-size:13px;font-weight:700;text-align:center;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-opno"></td>
+            <td colspan="2" style="font-size:11px;font-weight:700;text-align:center;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-opadi"></td>
+            <td style="font-size:11px;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-hat"></td>
+            <td style="font-size:11px;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-makadi"></td>
+            <td colspan="2" style="font-size:11px;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-makno"></td>
+            <td colspan="2" style="font-size:11px;white-space:pre-line;padding:4px 3px;vertical-align:middle;border:1px solid #bbb;" id="pv-ayar"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p4a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p4r"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p4d"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-k2r"></td>
           </tr>
 
-          <!-- ═══ ROW 7: Adım Başlıkları + Parça 4 ═══ -->
-          <tr>
-            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">NO</td>
-            <td colspan="3" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">OPERASYON TANIMLAMA</td>
-            <td colspan="3" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">AÇIKLAMA</td>
-            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;border:1px solid #bbb;">OPERASYON ADIMLARI</td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p5a"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p5r"></td>
-            <td style="font-size:10px;border:1px solid #bbb;" id="pv-p5d"></td>
+          <!-- ═══ ROW 7: Adım Başlıkları + Parça 5 ═══ -->
+          <tr style="height:36px;">
+            <td style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">NO</td>
+            <td colspan="3" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">OPERASYON TANIMLAMA</td>
+            <td colspan="3" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">AÇIKLAMA</td>
+            <td colspan="2" style="font-size:9px;font-weight:700;text-align:center;background:#fce4d6;padding:4px 2px;border:1px solid #bbb;">OPERASYON ADIMLARI</td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p5a"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p5r"></td>
+            <td style="font-size:10px;padding:5px 5px;vertical-align:middle;border:1px solid #bbb;" id="pv-p5d"></td>
           </tr>
 
           <!-- ═══ ROW 8: Adım 1 + Foto 1-2-3 (rowspan 3) ═══ -->
